@@ -115,7 +115,7 @@ def test_file_contents(file_name, expected_content):
 
 def test_sample_data():
     """Test that sample data file exists and is readable."""
-    sample_file = Path(__file__).parent / "sample_data.csv"
+    sample_file = Path(__file__).parent.parent / "data" / "sample_data.csv"
     assert sample_file.exists(), "Sample data file is missing"
 
     # Try to read with pandas
