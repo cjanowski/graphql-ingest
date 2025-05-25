@@ -11,13 +11,11 @@ import json
 # GraphQL endpoint
 GRAPHQL_URL = "http://localhost:8000/graphql"
 
+
 def run_query(query, variables=None):
     """Run a GraphQL query against the API."""
-    payload = {
-        "query": query,
-        "variables": variables or {}
-    }
-    
+    payload = {"query": query, "variables": variables or {}}
+
     try:
         response = requests.post(GRAPHQL_URL, json=payload)
         response.raise_for_status()
@@ -25,6 +23,7 @@ def run_query(query, variables=None):
     except requests.exceptions.RequestException as e:
         print(f"Error: {e}")
         return None
+
 
 def test_get_tables():
     """Test getting all tables."""
@@ -40,12 +39,13 @@ def test_get_tables():
         }
     }
     """
-    
+
     print("🔍 Getting all tables...")
     result = run_query(query)
     if result:
         print(json.dumps(result, indent=2))
     print("-" * 50)
+
 
 def test_get_table_data(table_name="employees"):
     """Test getting data from a specific table."""
@@ -61,18 +61,15 @@ def test_get_table_data(table_name="employees"):
         }
     }
     """
-    
-    variables = {
-        "tableName": table_name,
-        "limit": 5,
-        "offset": 0
-    }
-    
+
+    variables = {"tableName": table_name, "limit": 5, "offset": 0}
+
     print(f"📊 Getting data from table: {table_name}")
     result = run_query(query, variables)
     if result:
         print(json.dumps(result, indent=2))
     print("-" * 50)
+
 
 def test_get_table_schema(table_name="employees"):
     """Test getting schema for a specific table."""
@@ -88,14 +85,15 @@ def test_get_table_schema(table_name="employees"):
         }
     }
     """
-    
+
     variables = {"tableName": table_name}
-    
+
     print(f"🏗️  Getting schema for table: {table_name}")
     result = run_query(query, variables)
     if result:
         print(json.dumps(result, indent=2))
     print("-" * 50)
+
 
 def test_ingest_csv():
     """Test CSV ingestion via GraphQL mutation."""
@@ -110,25 +108,23 @@ def test_ingest_csv():
         }
     }
     """
-    
-    variables = {
-        "filePath": "sample_data.csv",
-        "tableName": "employees"
-    }
-    
+
+    variables = {"filePath": "sample_data.csv", "tableName": "employees"}
+
     print("📥 Testing CSV ingestion...")
     result = run_query(mutation, variables)
     if result:
         print(json.dumps(result, indent=2))
     print("-" * 50)
 
+
 if __name__ == "__main__":
     print("🧪 Testing GraphQL API")
     print("Make sure the server is running: python cli.py serve")
     print("=" * 50)
-    
+
     # Run tests
     test_get_tables()
     test_get_table_data()
     test_get_table_schema()
-    # test_ingest_csv()  # Uncomment to test CSV ingestion via GraphQL 
+    # test_ingest_csv()  # Uncomment to test CSV ingestion via GraphQL

@@ -1,7 +1,7 @@
 """
 CSV to PostgreSQL GraphQL CLI
 
-A beautiful command-line tool for ingesting CSV files into PostgreSQL 
+A beautiful command-line tool for ingesting CSV files into PostgreSQL
 and serving the data via GraphQL API.
 """
 
@@ -16,9 +16,4 @@ from .config import Config
 from .database import db_manager
 from .server import start_server
 
-__all__ = [
-    "cli",
-    "Config", 
-    "db_manager",
-    "start_server"
-] 
+__all__ = ["cli", "Config", "db_manager", "start_server"]

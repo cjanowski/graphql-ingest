@@ -3,12 +3,11 @@
 """
 CSV to PostgreSQL GraphQL CLI
 
-A command-line tool for ingesting CSV files into PostgreSQL 
+A command-line tool for ingesting CSV files into PostgreSQL
 and serving the data via GraphQL API.
 """
 
 import click
-import os
 import sys
 from pathlib import Path
 from database import db_manager
@@ -67,57 +66,61 @@ SERVER_ART = """
        └─┘└─┘┴└─ └┘ └─┘┴└─  ┴└─└─┘┴ ┴─┴┘ ┴ 
 """
 
+
 def print_banner():
     """Print the CLI banner."""
-    click.echo(click.style(BANNER, fg='cyan', bold=True))
+    click.echo(click.style(BANNER, fg="cyan", bold=True))
 
-def print_divider(style='normal'):
+
+def print_divider(style="normal"):
     """Print a visual divider."""
-    if style == 'fancy':
-        click.echo(click.style(FANCY_DIVIDER, fg='blue'))
-    elif style == 'wave':
-        click.echo(click.style(WAVE_DIVIDER, fg='blue'))
+    if style == "fancy":
+        click.echo(click.style(FANCY_DIVIDER, fg="blue"))
+    elif style == "wave":
+        click.echo(click.style(WAVE_DIVIDER, fg="blue"))
     else:
-        click.echo(click.style(DIVIDER, fg='blue'))
+        click.echo(click.style(DIVIDER, fg="blue"))
+
 
 def print_mini_art(art_type):
     """Print mini ASCII art for different contexts."""
-    art_map = {
-        'init': INIT_ART,
-        'ingest': INGEST_ART,
-        'server': SERVER_ART
-    }
+    art_map = {"init": INIT_ART, "ingest": INGEST_ART, "server": SERVER_ART}
     if art_type in art_map:
-        click.echo(click.style(art_map[art_type], fg='magenta', bold=True))
+        click.echo(click.style(art_map[art_type], fg="magenta", bold=True))
+
 
 def print_success(message):
     """Print a success message with style."""
-    click.echo(click.style(f"✅ {message}", fg='green', bold=True))
+    click.echo(click.style(f"✅ {message}", fg="green", bold=True))
+
 
 def print_error(message):
     """Print an error message with style."""
-    click.echo(click.style(f"❌ {message}", fg='red', bold=True))
+    click.echo(click.style(f"❌ {message}", fg="red", bold=True))
+
 
 def print_warning(message):
     """Print a warning message with style."""
-    click.echo(click.style(f"⚠️  {message}", fg='yellow', bold=True))
+    click.echo(click.style(f"⚠️  {message}", fg="yellow", bold=True))
+
 
 def print_info(message):
     """Print an info message with style."""
-    click.echo(click.style(f"ℹ️  {message}", fg='blue'))
+    click.echo(click.style(f"ℹ️  {message}", fg="blue"))
+
 
 @click.group(invoke_without_command=True)
 @click.version_option(version="1.0.0", prog_name="CSV GraphQL CLI")
 @click.pass_context
 def cli(ctx):
     """CSV to PostgreSQL GraphQL CLI
-    
+
     A powerful tool for ingesting CSV files into PostgreSQL and serving data via GraphQL.
     """
     if ctx.invoked_subcommand is None:
         print_banner()
-        print_divider('fancy')
-        
+        print_divider("fancy")
+
         help_text = """
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃                         🚀 QUICK START 🚀                         ┃
@@ -139,43 +142,44 @@ def cli(ctx):
 
 🔧 Available Commands:
 """
-        click.echo(click.style(help_text, fg='cyan'))
-        
+        click.echo(click.style(help_text, fg="cyan"))
+
         commands = [
             ("🔧 init-db", "Test database connection"),
             ("📥 ingest", "Import CSV file to PostgreSQL"),
             ("🔍 preview", "Preview table data"),
             ("📋 tables", "List all database tables"),
             ("🚀 serve", "Start GraphQL API server"),
-            ("⚙️  config-info", "Show current configuration")
+            ("⚙️  config-info", "Show current configuration"),
         ]
-        
+
         for cmd, desc in commands:
             click.echo(f"  {click.style(cmd, fg='green', bold=True):<20} {desc}")
-        
-        print_divider('wave')
-        
+
+        print_divider("wave")
+
         footer_art = """
     ⚡ Ready to transform your CSV data into powerful GraphQL APIs! ⚡
         """
-        click.echo(click.style(footer_art, fg='magenta', bold=True))
-        print_divider('fancy')
+        click.echo(click.style(footer_art, fg="magenta", bold=True))
+        print_divider("fancy")
     pass
+
 
 @cli.command()
 def init_db():
     """Initialize database connection and test connectivity."""
     print_banner()
-    print_divider('fancy')
-    print_mini_art('init')
-    print_divider('wave')
-    
+    print_divider("fancy")
+    print_mini_art("init")
+    print_divider("wave")
+
     print_info("Testing database connection...")
-    
+
     if db_manager.create_database_if_not_exists():
         print_success("Database connection successful!")
         click.echo(f"📍 Connected to: {click.style(Config.DATABASE_URL, fg='green')}")
-        
+
         connection_box = """
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃                    🎉 CONNECTION SUCCESS! 🎉                ┃
@@ -187,39 +191,45 @@ def init_db():
 ┃  🎯 Next step: python3 cli.py ingest -f data.csv -t table  ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 """
-        click.echo(click.style(connection_box, fg='green', bold=True))
+        click.echo(click.style(connection_box, fg="green", bold=True))
     else:
         print_error("Database connection failed!")
         click.echo("Please check your database configuration in the .env file")
         sys.exit(1)
 
+
 @cli.command()
-@click.option('--file', '-f', required=True, type=click.Path(exists=True), 
-              help='Path to the CSV file to ingest')
-@click.option('--table', '-t', required=True, 
-              help='Name of the table to create/insert into')
-@click.option('--replace', is_flag=True, 
-              help='Replace table if it already exists')
+@click.option(
+    "--file",
+    "-f",
+    required=True,
+    type=click.Path(exists=True),
+    help="Path to the CSV file to ingest",
+)
+@click.option(
+    "--table", "-t", required=True, help="Name of the table to create/insert into"
+)
+@click.option("--replace", is_flag=True, help="Replace table if it already exists")
 def ingest(file, table, replace):
     """Ingest a CSV file into PostgreSQL."""
     file_path = Path(file).resolve()
-    
+
     print_banner()
-    print_divider('fancy')
-    print_mini_art('ingest')
-    print_divider('wave')
-    
-    click.echo(click.style("📊 CSV INGESTION PIPELINE STARTED", fg='cyan', bold=True))
+    print_divider("fancy")
+    print_mini_art("ingest")
+    print_divider("wave")
+
+    click.echo(click.style("📊 CSV INGESTION PIPELINE STARTED", fg="cyan", bold=True))
     print_divider()
-    
+
     click.echo(f"📁 File: {click.style(str(file_path), fg='yellow')}")
     click.echo(f"🎯 Target table: {click.style(table, fg='green', bold=True)}")
-    
+
     # Test database connection first
     if not db_manager.create_database_if_not_exists():
         print_error("Database connection failed!")
         sys.exit(1)
-    
+
     # Check if table exists and handle replace option
     existing_tables = [t["name"] for t in db_manager.get_tables()]
     if table in existing_tables:
@@ -232,16 +242,18 @@ def ingest(file, table, replace):
         else:
             print_warning(f"Table '{table}' already exists. Data will be appended.")
             print_info("Use --replace flag to replace the table instead.")
-    
+
     print_divider()
-    
+
     # Perform ingestion
-    with click.progressbar(length=1, label=click.style('Processing CSV', fg='cyan')) as bar:
+    with click.progressbar(
+        length=1, label=click.style("Processing CSV", fg="cyan")
+    ) as bar:
         result = db_manager.ingest_csv(str(file_path), table)
         bar.update(1)
-    
+
     print_divider()
-    
+
     if result["success"]:
         success_box = f"""
 ╔══════════════════════════════════════════════════════════════╗
@@ -254,37 +266,46 @@ def ingest(file, table, replace):
 ║  Columns: {', '.join(result['columns']):<48} ║
 ╚══════════════════════════════════════════════════════════════╝
 """
-        click.echo(click.style(success_box, fg='green', bold=True))
+        click.echo(click.style(success_box, fg="green", bold=True))
         print_info(f"Ready to query! Try: python3 cli.py preview -t {table}")
     else:
         print_error(f"Ingestion failed: {result['error']}")
         sys.exit(1)
 
+
 @cli.command()
-@click.option('--host', '-h', default=None, 
-              help=f'Host to bind the server (default: {Config.SERVER_HOST})')
-@click.option('--port', '-p', default=None, type=int,
-              help=f'Port to bind the server (default: {Config.SERVER_PORT})')
-@click.option('--reload', is_flag=True, 
-              help='Enable auto-reload for development')
+@click.option(
+    "--host",
+    "-h",
+    default=None,
+    help=f"Host to bind the server (default: {Config.SERVER_HOST})",
+)
+@click.option(
+    "--port",
+    "-p",
+    default=None,
+    type=int,
+    help=f"Port to bind the server (default: {Config.SERVER_PORT})",
+)
+@click.option("--reload", is_flag=True, help="Enable auto-reload for development")
 def serve(host, port, reload):
     """Start the GraphQL API server."""
     host = host or Config.SERVER_HOST
     port = port or Config.SERVER_PORT
-    
+
     print_banner()
-    print_divider('fancy')
-    print_mini_art('server')
-    print_divider('wave')
-    
+    print_divider("fancy")
+    print_mini_art("server")
+    print_divider("wave")
+
     # Test database connection first
     if not db_manager.create_database_if_not_exists():
         print_error("Database connection failed!")
         sys.exit(1)
-    
-    click.echo(click.style("🚀 LAUNCHING GRAPHQL API SERVER...", fg='cyan', bold=True))
+
+    click.echo(click.style("🚀 LAUNCHING GRAPHQL API SERVER...", fg="cyan", bold=True))
     print_divider()
-    
+
     # Server info box
     server_info = f"""
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -304,72 +325,80 @@ def serve(host, port, reload):
 ┃  🛑 Press Ctrl+C to stop the server                               ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 """
-    click.echo(click.style(server_info, fg='green'))
-    
+    click.echo(click.style(server_info, fg="green"))
+
     try:
         start_server(host=host, port=port, reload=reload)
     except KeyboardInterrupt:
-        print_divider('fancy')
-        
+        print_divider("fancy")
+
         shutdown_art = """
         🛑 ┌─┐┬ ┬┬ ┬┌┬┐┌┬┐┌─┐┬ ┬┌┐┌
            └─┐├─┤│ │ │  │││ │││││││││
            └─┘┴ ┴└─┘ ┴ ─┴┘└─┘└┘└┘┘└┘
         """
-        click.echo(click.style(shutdown_art, fg='yellow', bold=True))
-        click.echo(click.style("👋 Server stopped gracefully - Thanks for using CSV GraphQL!", fg='yellow', bold=True))
-        print_divider('wave')
+        click.echo(click.style(shutdown_art, fg="yellow", bold=True))
+        click.echo(
+            click.style(
+                "👋 Server stopped gracefully - Thanks for using CSV GraphQL!",
+                fg="yellow",
+                bold=True,
+            )
+        )
+        print_divider("wave")
+
 
 @cli.command()
 def tables():
     """List all tables in the database."""
     click.echo("📋 Database Tables:")
-    
+
     # Test database connection first
     if not db_manager.create_database_if_not_exists():
         click.echo("❌ Database connection failed!")
         sys.exit(1)
-    
+
     tables_list = db_manager.get_tables()
-    
+
     if not tables_list:
         click.echo("📭 No tables found in the database")
         return
-    
+
     for table in tables_list:
         click.echo(f"\n🔧 Table: {table['name']}")
         click.echo("   Columns:")
-        for col in table['columns']:
-            nullable = "NULL" if col['nullable'] else "NOT NULL"
+        for col in table["columns"]:
+            nullable = "NULL" if col["nullable"] else "NOT NULL"
             click.echo(f"     • {col['name']} ({col['type']}) {nullable}")
 
+
 @cli.command()
-@click.option('--table', '-t', required=True, help='Table name to query')
-@click.option('--limit', '-l', default=10, help='Number of rows to display')
+@click.option("--table", "-t", required=True, help="Table name to query")
+@click.option("--limit", "-l", default=10, help="Number of rows to display")
 def preview(table, limit):
     """Preview data from a table."""
     click.echo(f"👀 Previewing table: {table} (limit: {limit})")
-    
+
     # Test database connection first
     if not db_manager.create_database_if_not_exists():
         click.echo("❌ Database connection failed!")
         sys.exit(1)
-    
+
     result = db_manager.get_table_data(table, limit=limit)
-    
+
     if result["success"]:
         click.echo(f"📊 Total rows: {result['total']}")
         click.echo(f"📄 Showing {len(result['data'])} rows:")
-        
-        if result['data']:
+
+        if result["data"]:
             # Display data in a simple table format
-            data = result['data']
+            data = result["data"]
             headers = list(data[0].keys()) if data else []
-            
+
             # Print headers
             click.echo("\n" + " | ".join(f"{h:<15}" for h in headers))
             click.echo("-" * (len(headers) * 17))
-            
+
             # Print rows
             for row in data:
                 values = [str(row.get(h, ""))[:15] for h in headers]
@@ -378,6 +407,7 @@ def preview(table, limit):
             click.echo("📭 No data found")
     else:
         click.echo(f"❌ Error: {result['error']}")
+
 
 @cli.command()
 def config_info():
@@ -388,5 +418,6 @@ def config_info():
     click.echo(f"🔌 Server Port: {Config.SERVER_PORT}")
     click.echo(f"🐛 Debug Mode: {Config.DEBUG}")
 
-if __name__ == '__main__':
-    cli() 
+
+if __name__ == "__main__":
+    cli()
