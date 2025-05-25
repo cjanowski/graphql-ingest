@@ -1,0 +1,10 @@
+click==8.1.7
+pandas==2.1.4
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+strawberry-graphql==0.216.1
+uvicorn==0.24.0
+fastapi==0.104.1
+python-dotenv==1.0.0
+alembic==1.13.1
+requests==2.31.0 
