@@ -23,30 +23,72 @@ logger = logging.getLogger(__name__)
 
 # ASCII Art Banner
 BANNER = """
-╔═══════════════════════════════════════════════════════════════════════════════╗
-║                                                                               ║
-║   ██████╗███████╗██╗   ██╗     ██████╗ ██████╗  █████╗ ██████╗ ██╗  ██╗██████║
-║  ██╔════╝██╔════╝██║   ██║    ██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██║  ██║██╔═══║
-║  ██║     ███████╗██║   ██║    ██║  ███╗██████╔╝███████║██████╔╝███████║██████║
-║  ██║     ╚════██║╚██╗ ██╔╝    ██║   ██║██╔══██╗██╔══██║██╔═══╝ ██╔══██║██╔═══║
-║  ╚██████╗███████║ ╚████╔╝     ╚██████╔╝██║  ██║██║  ██║██║     ██║  ██║██████║
-║   ╚═════╝╚══════╝  ╚═══╝       ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚═════║
-║                                                                               ║
-║           🍓 CSV to PostgreSQL GraphQL CLI Tool v1.0.0 🍓                   ║
-║           📊 Ingest → 🐘 Store → 🔍 Query → 🚀 Serve                        ║
-║                                                                               ║
-╚═══════════════════════════════════════════════════════════════════════════════╝
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃  ┌─┐┌─┐┬  ┬   ┌─┐┬─┐┌─┐┌─┐┬ ┬┌─┐┬    ┌─┐┬  ┬   ┌┬┐┌─┐┌─┐┬    🍓       ┃
+┃  │  └─┐└┐┌┘   │ ┬├┬┘├─┤├─┘├─┤│ ││  ───│  │  │    │ │ ││ ││                ┃
+┃  └─┘└─┘ └┘    └─┘┴└─┴ ┴┴  ┴ ┴└─┘┴─┘   └─┘┴─┘┴   ─┴┘└─┘└─┘┴─┘              ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃                                                                             ┃
+┃  ██████╗███████╗██╗   ██╗    ██████╗ ██████╗  █████╗ ██████╗ ██╗  ██╗██████┃
+┃ ██╔════╝██╔════╝██║   ██║   ██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██║  ██║██╔═══┃
+┃ ██║     ███████╗██║   ██║   ██║  ███╗██████╔╝███████║██████╔╝███████║██████┃
+┃ ██║     ╚════██║╚██╗ ██╔╝   ██║   ██║██╔══██╗██╔══██║██╔═══╝ ██╔══██║██╔═══┃
+┃ ╚██████╗███████║ ╚████╔╝    ╚██████╔╝██║  ██║██║  ██║██║     ██║  ██║██████┃
+┃  ╚═════╝╚══════╝  ╚═══╝      ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚═════┃
+┃                                                                             ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃          🍓 CSV to PostgreSQL GraphQL CLI Tool v1.0.0 🍓                  ┃
+┃          📊 Ingest → 🐘 Store → 🔍 Query → 🚀 Serve                       ┃
+┃                                                                             ┃
+┃   ✨ Professional Data Pipeline in Your Terminal ✨                        ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 """
 
 DIVIDER = "═" * 80
+FANCY_DIVIDER = "━" * 80
+WAVE_DIVIDER = "┈" * 80
+
+# Mini ASCII art for different contexts
+INIT_ART = """
+    🔧 ┌─┐┌─┐┌┬┐┌─┐┌┐ ┌─┐┌─┐┌─┐  ┬┌┐┌┬┌┬┐
+       └─┐├┤  │ │ │├┴┐├─┤└─┐├┤   ││││││ │ 
+       └─┘└─┘ ┴ └─┘└─┘┴ ┴└─┘└─┘  ┴┘└┘┴ ┴ 
+"""
+
+INGEST_ART = """
+    📊 ┌─┐┌─┐┬  ┬  ┬┌┐┌┌─┐┌─┐┌─┐┌┬┐
+       │  └─┐└┐┌┘  ││││││ ┬├┤ └─┐ │ 
+       └─┘└─┘ └┘   ┴┘└┘└─┘└─┘└─┘ ┴ 
+"""
+
+SERVER_ART = """
+    🚀 ┌─┐┌─┐┬─┐┬  ┬┌─┐┬─┐  ┬─┐┌─┐┌─┐┌┬┐┬ ┬
+       └─┐├┤ ├┬┘└┐┌┘├┤ ├┬┘  ├┬┘├┤ ├─┤ ││└┬┘
+       └─┘└─┘┴└─ └┘ └─┘┴└─  ┴└─└─┘┴ ┴─┴┘ ┴ 
+"""
 
 def print_banner():
     """Print the CLI banner."""
     click.echo(click.style(BANNER, fg='cyan', bold=True))
 
-def print_divider():
+def print_divider(style='normal'):
     """Print a visual divider."""
-    click.echo(click.style(DIVIDER, fg='blue'))
+    if style == 'fancy':
+        click.echo(click.style(FANCY_DIVIDER, fg='blue'))
+    elif style == 'wave':
+        click.echo(click.style(WAVE_DIVIDER, fg='blue'))
+    else:
+        click.echo(click.style(DIVIDER, fg='blue'))
+
+def print_mini_art(art_type):
+    """Print mini ASCII art for different contexts."""
+    art_map = {
+        'init': INIT_ART,
+        'ingest': INGEST_ART,
+        'server': SERVER_ART
+    }
+    if art_type in art_map:
+        click.echo(click.style(art_map[art_type], fg='magenta', bold=True))
 
 def print_success(message):
     """Print a success message with style."""
@@ -64,7 +106,7 @@ def print_info(message):
     """Print an info message with style."""
     click.echo(click.style(f"ℹ️  {message}", fg='blue'))
 
-@click.group()
+@click.group(invoke_without_command=True)
 @click.version_option(version="1.0.0", prog_name="CSV GraphQL CLI")
 @click.pass_context
 def cli(ctx):
@@ -74,25 +116,28 @@ def cli(ctx):
     """
     if ctx.invoked_subcommand is None:
         print_banner()
-        print_divider()
+        print_divider('fancy')
         
         help_text = """
-╔════════════════════════════════════════════════════════════════════╗
-║                           🚀 QUICK START 🚀                       ║
-╠════════════════════════════════════════════════════════════════════╣
-║                                                                    ║
-║  1️⃣  Initialize:    python3 cli.py init-db                       ║
-║  2️⃣  Ingest CSV:    python3 cli.py ingest -f data.csv -t table   ║
-║  3️⃣  Preview:       python3 cli.py preview -t table              ║
-║  4️⃣  Start server:  python3 cli.py serve                         ║
-║  5️⃣  Query data:    Visit http://localhost:8000/graphql          ║
-║                                                                    ║
-║  📖 Full help:      python3 cli.py --help                        ║
-║  📖 Command help:   python3 cli.py COMMAND --help                ║
-║                                                                    ║
-╚════════════════════════════════════════════════════════════════════╝
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃                         🚀 QUICK START 🚀                         ┃
+┃                    From CSV to GraphQL in Minutes!                ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃                                                                    ┃
+┃  1️⃣  Initialize:    python3 cli.py init-db                       ┃
+┃  2️⃣  Ingest CSV:    python3 cli.py ingest -f data.csv -t table   ┃
+┃  3️⃣  Preview:       python3 cli.py preview -t table              ┃
+┃  4️⃣  Start server:  python3 cli.py serve                         ┃
+┃  5️⃣  Query data:    Visit http://localhost:8000/graphql          ┃
+┃                                                                    ┃
+┃  ✨ Pro tip: Use csvgql for shorter commands after install!       ┃
+┃                                                                    ┃
+┃  📖 Full help:      python3 cli.py --help                        ┃
+┃  📖 Command help:   python3 cli.py COMMAND --help                ┃
+┃                                                                    ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-Available Commands:
+🔧 Available Commands:
 """
         click.echo(click.style(help_text, fg='cyan'))
         
@@ -108,21 +153,41 @@ Available Commands:
         for cmd, desc in commands:
             click.echo(f"  {click.style(cmd, fg='green', bold=True):<20} {desc}")
         
-        print_divider()
+        print_divider('wave')
+        
+        footer_art = """
+    ⚡ Ready to transform your CSV data into powerful GraphQL APIs! ⚡
+        """
+        click.echo(click.style(footer_art, fg='magenta', bold=True))
+        print_divider('fancy')
     pass
 
 @cli.command()
 def init_db():
     """Initialize database connection and test connectivity."""
     print_banner()
-    print_divider()
+    print_divider('fancy')
+    print_mini_art('init')
+    print_divider('wave')
+    
     print_info("Testing database connection...")
     
     if db_manager.create_database_if_not_exists():
         print_success("Database connection successful!")
         click.echo(f"📍 Connected to: {click.style(Config.DATABASE_URL, fg='green')}")
-        print_divider()
-        click.echo(click.style("🎉 Ready to ingest CSV files and serve GraphQL!", fg='magenta', bold=True))
+        
+        connection_box = """
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃                    🎉 CONNECTION SUCCESS! 🎉                ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃  ✅ Database ready for CSV ingestion                        ┃
+┃  ✅ GraphQL schema prepared                                 ┃
+┃  ✅ All systems operational                                 ┃
+┃                                                             ┃
+┃  🎯 Next step: python3 cli.py ingest -f data.csv -t table  ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+"""
+        click.echo(click.style(connection_box, fg='green', bold=True))
     else:
         print_error("Database connection failed!")
         click.echo("Please check your database configuration in the .env file")
@@ -140,9 +205,11 @@ def ingest(file, table, replace):
     file_path = Path(file).resolve()
     
     print_banner()
-    print_divider()
+    print_divider('fancy')
+    print_mini_art('ingest')
+    print_divider('wave')
     
-    click.echo(click.style("📊 CSV INGESTION STARTED", fg='cyan', bold=True))
+    click.echo(click.style("📊 CSV INGESTION PIPELINE STARTED", fg='cyan', bold=True))
     print_divider()
     
     click.echo(f"📁 File: {click.style(str(file_path), fg='yellow')}")
@@ -206,40 +273,52 @@ def serve(host, port, reload):
     port = port or Config.SERVER_PORT
     
     print_banner()
-    print_divider()
+    print_divider('fancy')
+    print_mini_art('server')
+    print_divider('wave')
     
     # Test database connection first
     if not db_manager.create_database_if_not_exists():
         print_error("Database connection failed!")
         sys.exit(1)
     
-    click.echo(click.style("🚀 Starting GraphQL API server...", fg='cyan', bold=True))
+    click.echo(click.style("🚀 LAUNCHING GRAPHQL API SERVER...", fg='cyan', bold=True))
     print_divider()
     
     # Server info box
     server_info = f"""
-╔════════════════════════════════════════════════════════════════════╗
-║                         🍓 SERVER READY 🍓                        ║
-╠════════════════════════════════════════════════════════════════════╣
-║  🌐 Server URL:      http://{host}:{port:<30} ║
-║  🔍 GraphQL Playground: http://{host}:{port}/graphql{' ' * 19} ║
-║  📊 API Docs:        http://{host}:{port}/docs{' ' * 23} ║
-║                                                                    ║
-║  💡 Try some queries:                                              ║
-║     • List tables:     {{ tables {{ name }} }}                    ║
-║     • Get table data:  {{ tableData(tableName: "employees") }}    ║
-║                                                                    ║
-║  🛑 Press Ctrl+C to stop the server                               ║
-╚════════════════════════════════════════════════════════════════════╝
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃                       🍓 SERVER READY 🍓                         ┃
+┃                    ✨ GraphQL API Active ✨                      ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃                                                                    ┃
+┃  🌐 Server URL:      http://{host}:{port:<30} ┃
+┃  🔍 GraphQL Playground: http://{host}:{port}/graphql{' ' * 19} ┃
+┃  📊 API Docs:        http://{host}:{port}/docs{' ' * 23} ┃
+┃                                                                    ┃
+┃  🎯 Sample Queries:                                                ┃
+┃     • List tables:     {{ tables {{ name }} }}                    ┃
+┃     • Get table data:  {{ tableData(tableName: "employees") }}    ┃
+┃     • Ingest CSV:      mutation {{ ingestCsv(file: "data.csv") }}  ┃
+┃                                                                    ┃
+┃  🛑 Press Ctrl+C to stop the server                               ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 """
     click.echo(click.style(server_info, fg='green'))
     
     try:
         start_server(host=host, port=port, reload=reload)
     except KeyboardInterrupt:
-        print_divider()
-        click.echo(click.style("\n👋 Server stopped gracefully", fg='yellow', bold=True))
-        print_divider()
+        print_divider('fancy')
+        
+        shutdown_art = """
+        🛑 ┌─┐┬ ┬┬ ┬┌┬┐┌┬┐┌─┐┬ ┬┌┐┌
+           └─┐├─┤│ │ │  │││ │││││││││
+           └─┘┴ ┴└─┘ ┴ ─┴┘└─┘└┘└┘┘└┘
+        """
+        click.echo(click.style(shutdown_art, fg='yellow', bold=True))
+        click.echo(click.style("👋 Server stopped gracefully - Thanks for using CSV GraphQL!", fg='yellow', bold=True))
+        print_divider('wave')
 
 @cli.command()
 def tables():

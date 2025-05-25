@@ -48,5 +48,9 @@ def start_server(host: str = None, port: int = None, reload: bool = False):
         log_level="info"
     )
 
+def main():
+    """Main entry point for direct server startup."""
+    start_server(reload=True)
+
 if __name__ == "__main__":
-    start_server(reload=True) 
+    main() 
