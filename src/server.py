@@ -45,7 +45,7 @@ async def health_check() -> Dict[str, str]:
 def start_server(
     host: Optional[str] = None,
     port: Optional[int] = None,
-    reload: bool = False
+    reload: bool = False,
 ) -> None:
     """Start the FastAPI server with Uvicorn."""
     host = host or Config.SERVER_HOST

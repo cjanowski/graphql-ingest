@@ -190,7 +190,7 @@ def cli(ctx: click.Context) -> None:
         ]
 
         for cmd, desc in commands:
-            styled_cmd = click.style(cmd, fg='green', bold=True)
+            styled_cmd = click.style(cmd, fg="green", bold=True)
             click.echo(f"  {styled_cmd:<20} {desc}")
 
         print_divider("wave")
@@ -248,7 +248,7 @@ def init_db() -> None:
     "--table",
     "-t",
     required=True,
-    help="Name of the table to create/insert into"
+    help="Name of the table to create/insert into",
 )
 @click.option(
     "--replace", is_flag=True, help="Replace table if it already exists"
@@ -285,13 +285,9 @@ def ingest(file: str, table: str, replace: bool) -> None:
                 conn.execute(text(f"DROP TABLE IF EXISTS {table}"))
                 conn.commit()
         else:
-            msg = (
-                f"Table '{table}' already exists. Data will be appended."
-            )
+            msg = f"Table '{table}' already exists. Data will be appended."
             print_warning(msg)
-            info_msg = (
-                "Use --replace flag to replace the table instead."
-            )
+            info_msg = "Use --replace flag to replace the table instead."
             print_info(info_msg)
 
     print_divider()
@@ -318,9 +314,7 @@ def ingest(file: str, table: str, replace: bool) -> None:
 ╚══════════════════════════════════════════════════════════════╝
 """
         click.echo(click.style(success_box, fg="green", bold=True))
-        ready_msg = (
-            f"Ready to query! Try: python3 cli.py preview -t {table}"
-        )
+        ready_msg = f"Ready to query! Try: python3 cli.py preview -t {table}"
         print_info(ready_msg)
     else:
         print_error(f"Ingestion failed: {result['error']}")
@@ -332,14 +326,14 @@ def ingest(file: str, table: str, replace: bool) -> None:
     "--host",
     "-h",
     default=None,
-    help=f"Host to bind the server (default: {Config.SERVER_HOST})"
+    help=f"Host to bind the server (default: {Config.SERVER_HOST})",
 )
 @click.option(
     "--port",
     "-p",
     default=None,
     type=int,
-    help=f"Port to bind the server (default: {Config.SERVER_PORT})"
+    help=f"Port to bind the server (default: {Config.SERVER_PORT})",
 )
 @click.option(
     "--reload", is_flag=True, help="Enable auto-reload for development"

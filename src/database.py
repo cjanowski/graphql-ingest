@@ -118,7 +118,7 @@ class DatabaseManager:
                 self.engine,
                 if_exists="append",
                 index=False,
-                method="multi"
+                method="multi",
             )
 
             return {
