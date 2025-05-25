@@ -1,0 +1,37 @@
+# Include documentation and configuration files
+include README.md
+include LICENSE
+include QUICKSTART.md
+include requirements.txt
+include pyproject.toml
+include env.example
+
+# Include sample data and test files
+include sample_data.csv
+include test_examples.py
+include install_test.py
+
+# Include version file if it exists
+include _version.py
+
+# Exclude unnecessary files
+exclude .env
+exclude *.log
+exclude .DS_Store
+
+# Exclude development and build directories
+recursive-exclude .git *
+recursive-exclude __pycache__ *
+recursive-exclude *.egg-info *
+recursive-exclude build *
+recursive-exclude dist *
+recursive-exclude .pytest_cache *
+recursive-exclude .mypy_cache *
+recursive-exclude .coverage *
+recursive-exclude htmlcov *
+
+# Include Python files
+recursive-include . *.py
+
+# Exclude test files from distribution
+recursive-exclude tests * 
