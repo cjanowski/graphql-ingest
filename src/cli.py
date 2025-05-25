@@ -293,7 +293,7 @@ def ingest(file: str, table: str, replace: bool) -> None:
     # Perform ingestion
     with click.progressbar(
         length=1, label=click.style("Processing CSV", fg="cyan")
-    ) as bar:  # type: click.progressbar
+    ) as bar:
         result = db_manager.ingest_csv(str(file_path), table)
         bar.update(1)
 
