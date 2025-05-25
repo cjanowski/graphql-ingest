@@ -14,9 +14,9 @@ __description__ = (
 )
 
 # Import main components for easy access
-from cli import cli
-from config import Config
-from database import db_manager
-from server import start_server
+from .cli import cli
+from .config import Config
+from .database import db_manager
+from .server import start_server
 
 __all__ = ["cli", "Config", "db_manager", "start_server"]

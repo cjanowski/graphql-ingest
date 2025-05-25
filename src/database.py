@@ -31,7 +31,8 @@ metadata = MetaData()
 
 
 class DatabaseManager:
-    """Manages database operations including table creation and data ingestion."""
+    """Manages database operations including table creation and data
+    ingestion."""
 
     def __init__(self) -> None:
         self.engine = engine
@@ -105,7 +106,11 @@ class DatabaseManager:
             # Insert data
             logger.info(f"Inserting {len(df)} rows into {table_name}")
             df.to_sql(
-                table_name, self.engine, if_exists="append", index=False, method="multi"
+                table_name,
+                self.engine,
+                if_exists="append",
+                index=False,
+                method="multi",
             )
 
             return {

@@ -15,7 +15,7 @@ from server import start_server
 from config import Config  # type: ignore
 import logging
 from sqlalchemy import text
-from typing import Optional
+from typing import Optional, Any
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -190,7 +190,8 @@ def cli(ctx: click.Context) -> None:
         ]
 
         for cmd, desc in commands:
-            click.echo(f"  {click.style(cmd, fg='green', bold=True):<20} {desc}")
+            styled_cmd = click.style(cmd, fg="green", bold=True)
+            click.echo(f"  {styled_cmd:<20} {desc}")
 
         print_divider("wave")
 
@@ -244,7 +245,10 @@ def init_db() -> None:
     help="Path to the CSV file to ingest",
 )
 @click.option(
-    "--table", "-t", required=True, help="Name of the table to create/insert into"
+    "--table",
+    "-t",
+    required=True,
+    help="Name of the table to create/insert into",
 )
 @click.option("--replace", is_flag=True, help="Replace table if it already exists")
 def ingest(file: str, table: str, replace: bool) -> None:
@@ -289,7 +293,7 @@ def ingest(file: str, table: str, replace: bool) -> None:
     # Perform ingestion
     with click.progressbar(
         length=1, label=click.style("Processing CSV", fg="cyan")
-    ) as bar:
+    ) as bar:  # type: Any
         result = db_manager.ingest_csv(str(file_path), table)
         bar.update(1)
 
