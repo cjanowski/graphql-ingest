@@ -123,7 +123,11 @@ python -m src.cli serve
 
 ## 🎬 Demo
 
-_Demo GIF coming soon - showing the beautiful CLI interface in action!_
+_Demo video coming soon - showing the beautiful CLI interface in action!_
+<img width="631" alt="Screenshot 2025-05-25 at 6 47 00 PM" src="https://github.com/user-attachments/assets/ad3445bf-5081-4ef8-8d50-579c64592ba0" />
+<img width="503" alt="Screenshot 2025-05-25 at 6 47 08 PM" src="https://github.com/user-attachments/assets/8f9779b7-7e2e-4606-8e0e-2c1a5bb2964f" />
+<img width="465" alt="Screenshot 2025-05-25 at 6 47 18 PM" src="https://github.com/user-attachments/assets/7e1009ea-8fac-4688-8776-b90cdc11337a" />
+<img width="550" alt="Screenshot 2025-05-25 at 6 47 33 PM" src="https://github.com/user-attachments/assets/c163667a-76be-4b14-8a23-50032e94cffa" />
 
 ## 📊 Example Workflow
 
