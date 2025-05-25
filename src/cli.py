@@ -12,10 +12,10 @@ import sys
 from pathlib import Path
 from database import db_manager
 from server import start_server
-from config import Config
+from config import Config  # type: ignore
 import logging
 from sqlalchemy import text
-from typing import Optional, Any
+from typing import Optional
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -51,20 +51,20 @@ WAVE_DIVIDER = "┈" * 80
 # Mini ASCII art for different contexts
 INIT_ART = """
     🔧 ┌─┐┌─┐┌┬┐┌─┐┌┐ ┌─┐┌─┐┌─┐  ┬┌┐┌┬┌┬┐
-       └─┐├┤  │ │ │├┴┐├─┤└─┐├┤   ││││││ │ 
-       └─┘└─┘ ┴ └─┘└─┘┴ ┴└─┘└─┘  ┴┘└┘┴ ┴ 
+       └─┐├┤  │ │ │├┴┐├─┤└─┐├┤   ││││││ │
+       └─┘└─┘ ┴ └─┘└─┘┴ ┴└─┘└─┘  ┴┘└┘┴ ┴
 """
 
 INGEST_ART = """
     📊 ┌─┐┌─┐┬  ┬  ┬┌┐┌┌─┐┌─┐┌─┐┌┬┐
-       │  └─┐└┐┌┘  ││││││ ┬├┤ └─┐ │ 
-       └─┘└─┘ └┘   ┴┘└┘└─┘└─┘└─┘ ┴ 
+       │  └─┐└┐┌┘  ││││││ ┬├┤ └─┐ │
+       └─┘└─┘ └┘   ┴┘└┘└─┘└─┘└─┘ ┴
 """
 
 SERVER_ART = """
     🚀 ┌─┐┌─┐┬─┐┬  ┬┌─┐┬─┐  ┬─┐┌─┐┌─┐┌┬┐┬ ┬
        └─┐├┤ ├┬┘└┐┌┘├┤ ├┬┘  ├┬┘├┤ ├─┤ ││└┬┘
-       └─┘└─┘┴└─ └┘ └─┘┴└─  ┴└─└─┘┴ ┴─┴┘ ┴ 
+       └─┘└─┘┴└─ └┘ └─┘┴└─  ┴└─└─┘┴ ┴─┴┘ ┴
 """
 
 
@@ -123,22 +123,56 @@ def cli(ctx: click.Context) -> None:
         print_banner()
         print_divider("fancy")
 
-        help_text = """
+        # Detect if running through the csvgql wrapper or directly
+        import sys
+        import os
+
+        # Check if we're being called through the wrapper script
+        is_wrapper = (
+            "csvgql.py" in " ".join(sys.argv)
+            or "csvgql" in os.path.basename(sys.argv[0])
+            or any("csvgql" in arg for arg in sys.argv)
+        )
+
+        if is_wrapper:
+            help_text = """
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃                         🚀 QUICK START 🚀                         ┃
 ┃                    From CSV to GraphQL in Minutes!                ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 ┃                                                                    ┃
-┃  1️⃣  Initialize:    python3 cli.py init-db                       ┃
-┃  2️⃣  Ingest CSV:    python3 cli.py ingest -f data.csv -t table   ┃
-┃  3️⃣  Preview:       python3 cli.py preview -t table              ┃
-┃  4️⃣  Start server:  python3 cli.py serve                         ┃
+┃  1️⃣  Initialize:    csvgql init-db                               ┃
+┃  2️⃣  Ingest CSV:    csvgql ingest -f data.csv -t table           ┃
+┃  3️⃣  Preview:       csvgql preview -t table                      ┃
+┃  4️⃣  Start server:  csvgql serve                                 ┃
+┃  5️⃣  Query data:    Visit http://localhost:8000/graphql          ┃
+┃                                                                    ┃
+┃  ✨ Using installed version with shorter commands!                ┃
+┃                                                                    ┃
+┃  📖 Full help:      csvgql --help                                ┃
+┃  📖 Command help:   csvgql COMMAND --help                        ┃
+┃                                                                    ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+🔧 Available Commands:
+"""
+        else:
+            help_text = """
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃                         🚀 QUICK START 🚀                         ┃
+┃                    From CSV to GraphQL in Minutes!                ┃
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃                                                                    ┃
+┃  1️⃣  Initialize:    python -m src.cli init-db                    ┃
+┃  2️⃣  Ingest CSV:    python -m src.cli ingest -f data.csv -t table ┃
+┃  3️⃣  Preview:       python -m src.cli preview -t table           ┃
+┃  4️⃣  Start server:  python -m src.cli serve                      ┃
 ┃  5️⃣  Query data:    Visit http://localhost:8000/graphql          ┃
 ┃                                                                    ┃
 ┃  ✨ Pro tip: Use csvgql for shorter commands after install!       ┃
 ┃                                                                    ┃
-┃  📖 Full help:      python3 cli.py --help                        ┃
-┃  📖 Command help:   python3 cli.py COMMAND --help                ┃
+┃  📖 Full help:      python -m src.cli --help                     ┃
+┃  📖 Command help:   python -m src.cli COMMAND --help             ┃
 ┃                                                                    ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
@@ -180,7 +214,8 @@ def init_db() -> None:
 
     if db_manager.create_database_if_not_exists():
         print_success("Database connection successful!")
-        click.echo(f"📍 Connected to: {click.style(Config.DATABASE_URL, fg='green')}")
+        db_url_styled = click.style(Config.DATABASE_URL, fg="green")
+        click.echo(f"📍 Connected to: {db_url_styled}")
 
         connection_box = """
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -190,7 +225,7 @@ def init_db() -> None:
 ┃  ✅ GraphQL schema prepared                                 ┃
 ┃  ✅ All systems operational                                 ┃
 ┃                                                             ┃
-┃  🎯 Next step: python3 cli.py ingest -f data.csv -t table  ┃
+┃  🎯 Next step: python -m src.cli ingest -f data.csv -t table  ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 """
         click.echo(click.style(connection_box, fg="green", bold=True))
@@ -221,7 +256,8 @@ def ingest(file: str, table: str, replace: bool) -> None:
     print_mini_art("ingest")
     print_divider("wave")
 
-    click.echo(click.style("📊 CSV INGESTION PIPELINE STARTED", fg="cyan", bold=True))
+    pipeline_msg = "📊 CSV INGESTION PIPELINE STARTED"
+    click.echo(click.style(pipeline_msg, fg="cyan", bold=True))
     print_divider()
 
     click.echo(f"📁 File: {click.style(str(file_path), fg='yellow')}")
@@ -236,21 +272,24 @@ def ingest(file: str, table: str, replace: bool) -> None:
     existing_tables = [t["name"] for t in db_manager.get_tables()]
     if table in existing_tables:
         if replace:
-            print_warning(f"Table '{table}' exists and will be replaced")
+            msg = f"Table '{table}' exists and will be replaced"
+            print_warning(msg)
             # Drop and recreate table
             with db_manager.engine.connect() as conn:
                 conn.execute(text(f"DROP TABLE IF EXISTS {table}"))
                 conn.commit()
         else:
-            print_warning(f"Table '{table}' already exists. Data will be appended.")
-            print_info("Use --replace flag to replace the table instead.")
+            msg = f"Table '{table}' already exists. Data will be appended."
+            print_warning(msg)
+            info_msg = "Use --replace flag to replace the table instead."
+            print_info(info_msg)
 
     print_divider()
 
     # Perform ingestion
     with click.progressbar(
         length=1, label=click.style("Processing CSV", fg="cyan")
-    ) as bar:  # type: Any
+    ) as bar:
         result = db_manager.ingest_csv(str(file_path), table)
         bar.update(1)
 
@@ -269,7 +308,8 @@ def ingest(file: str, table: str, replace: bool) -> None:
 ╚══════════════════════════════════════════════════════════════╝
 """
         click.echo(click.style(success_box, fg="green", bold=True))
-        print_info(f"Ready to query! Try: python3 cli.py preview -t {table}")
+        ready_msg = f"Ready to query! Try: python3 cli.py preview -t {table}"
+        print_info(ready_msg)
     else:
         print_error(f"Ingestion failed: {result['error']}")
         sys.exit(1)
@@ -305,7 +345,8 @@ def serve(host: Optional[str], port: Optional[int], reload: bool) -> None:
         print_error("Database connection failed!")
         sys.exit(1)
 
-    click.echo(click.style("🚀 LAUNCHING GRAPHQL API SERVER...", fg="cyan", bold=True))
+    launch_msg = "🚀 LAUNCHING GRAPHQL API SERVER..."
+    click.echo(click.style(launch_msg, fg="cyan", bold=True))
     print_divider()
 
     # Server info box
@@ -340,13 +381,8 @@ def serve(host: Optional[str], port: Optional[int], reload: bool) -> None:
            └─┘┴ ┴└─┘ ┴ ─┴┘└─┘└┘└┘┘└┘
         """
         click.echo(click.style(shutdown_art, fg="yellow", bold=True))
-        click.echo(
-            click.style(
-                "👋 Server stopped gracefully - Thanks for using CSV GraphQL!",
-                fg="yellow",
-                bold=True,
-            )
-        )
+        goodbye_msg = "👋 Server stopped gracefully - Thanks for using CSV GraphQL!"
+        click.echo(click.style(goodbye_msg, fg="yellow", bold=True))
         print_divider("wave")
 
 

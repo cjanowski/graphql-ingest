@@ -1,5 +1,5 @@
 import strawberry
-from typing import List, Optional, Dict, Any
+from typing import List, Optional
 from database import db_manager
 import json
 
@@ -74,7 +74,7 @@ class Query:
         if result["success"]:
             return TableDataResponse(
                 success=True,
-                data=json.dumps(result["data"], default=str),  # Convert to JSON string
+                data=json.dumps(result["data"], default=str),
                 total=result["total"],
                 limit=result["limit"],
                 offset=result["offset"],

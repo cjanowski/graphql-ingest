@@ -15,9 +15,9 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 import pandas as pd
-from typing import Dict, List, Any, Optional, Union
+from typing import Dict, List, Any
 import logging
-from config import Config
+from config import Config  # type: ignore
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -70,13 +70,15 @@ class DatabaseManager:
 
         if not has_id_column:
             # Add auto-incrementing id column if CSV doesn't have one
-            columns.append(Column("id", Integer, primary_key=True, autoincrement=True))
+            id_col = Column("id", Integer, primary_key=True, autoincrement=True)
+            columns.append(id_col)
 
         for col_name in df.columns:
             col_type = self.infer_column_type(df[col_name])
             # If this is an existing 'id' column, make it the primary key
             if col_name == "id" and has_id_column:
-                columns.append(Column(col_name, col_type, primary_key=True))
+                pk_col: Column = Column(col_name, col_type, primary_key=True)
+                columns.append(pk_col)
             else:
                 columns.append(Column(col_name, col_type))
 

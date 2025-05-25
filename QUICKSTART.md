@@ -4,16 +4,31 @@ This guide will help you get the **CSV to PostgreSQL GraphQL CLI** up and runnin
 
 ## Prerequisites
 
-- Python 3.8 or higher
+- Python 3.9 or higher
 - PostgreSQL database (local or remote)
 - Basic familiarity with command line
 
 ## Setup
 
-### 1. Install Dependencies
+### 1. Install the Package
 
+#### Option A: Install from PyPI (Recommended)
 ```bash
-pip install -r requirements.txt
+pip install csv-graphql-cli
+```
+
+#### Option B: Install from Source (Development)
+```bash
+git clone https://github.com/yourusername/csv-graphql-cli.git
+cd csv-graphql-cli
+pip install -e .
+```
+
+#### Option C: Development Setup
+```bash
+git clone https://github.com/yourusername/csv-graphql-cli.git
+cd csv-graphql-cli
+pip install -e ".[dev]"
 ```
 
 ### 2. Configure Database Connection
@@ -21,7 +36,7 @@ pip install -r requirements.txt
 Copy the example environment file and configure your database:
 
 ```bash
-cp env.example .env
+cp config/env.example .env
 ```
 
 Edit `.env` with your database credentials:
@@ -36,8 +51,14 @@ DB_PASSWORD=your_password
 
 ### 3. Test Database Connection
 
+#### Using Wrapper Script (Recommended)
 ```bash
-python3 cli.py init-db
+python csvgql.py init-db
+```
+
+#### Alternative: Direct Module
+```bash
+python -m src.cli init-db
 ```
 
 You should see a beautiful ASCII art banner followed by:
@@ -55,38 +76,70 @@ You should see a beautiful ASCII art banner followed by:
 
 ## 🚀 Basic Usage
 
-### 1. See the Beautiful Interface
+### Using Wrapper Script (Recommended)
+
+#### 1. See the Beautiful Interface
 
 ```bash
-python3 cli.py
+python csvgql.py
 ```
 
 This shows the main banner and quick start guide with colorful styling!
 
-### 2. Ingest Sample Data
+#### 2. Ingest Sample Data
 
 ```bash
-python3 cli.py ingest --file sample_data.csv --table employees
+python csvgql.py ingest --file data/sample_data.csv --table employees
 ```
 
-You'll see a beautiful progress display with success celebration box!
-
-### 3. View Tables
+#### 3. View Tables
 
 ```bash
-python3 cli.py tables
+python csvgql.py tables
 ```
 
-### 4. Preview Data
+#### 4. Preview Data
 
 ```bash
-python3 cli.py preview --table employees --limit 5
+python csvgql.py preview --table employees --limit 5
 ```
 
-### 5. Start GraphQL Server
+#### 5. Start GraphQL Server
 
 ```bash
-python3 cli.py serve
+python csvgql.py serve
+```
+
+### Alternative: Development Commands (from source)
+
+#### 1. See the Beautiful Interface
+
+```bash
+python -m src.cli
+```
+
+#### 2. Ingest Sample Data
+
+```bash
+python -m src.cli ingest --file data/sample_data.csv --table employees
+```
+
+#### 3. View Tables
+
+```bash
+python -m src.cli tables
+```
+
+#### 4. Preview Data
+
+```bash
+python -m src.cli preview --table employees --limit 5
+```
+
+#### 5. Start GraphQL Server
+
+```bash
+python -m src.cli serve
 ```
 
 You'll see a beautiful server ready box with all endpoints and example queries!
@@ -103,7 +156,14 @@ Open your browser and go to: http://localhost:8000/graphql
 - **📦 Information Boxes**: Styled borders and organized information display
 - **🎯 Progress Bars**: Visual feedback during CSV processing
 - **🎉 Success Celebrations**: Beautiful completion messages with emojis
-- **📋 Quick Start Guide**: Interactive help when running `python3 cli.py`
+- **📋 Quick Start Guide**: Interactive help when running main command
+
+## 📁 Sample Data Location
+
+Sample data files are now organized in the `data/` directory:
+
+- `data/sample_data.csv` - Basic test data
+- `data/test_data_large.csv` - Larger test dataset
 
 ## Sample GraphQL Queries
 
@@ -145,6 +205,14 @@ query {
 }
 ```
 
+## 🔧 Configuration Files
+
+Configuration files are now organized in the `config/` directory:
+
+- `config/env.example` - Environment template
+- `config/setup.cfg` - Setup configuration
+- `config/MANIFEST.in` - Package manifest
+
 ## Troubleshooting
 
 ### Database Connection Issues
@@ -155,17 +223,44 @@ query {
 
 ### CLI Issues
 
-1. **Permission denied**: Make sure the CLI script is executable: `chmod +x cli.py`
+1. **Command not found**: 
+   - If using installed version: Make sure you installed with `pip install -e .`
+   - If using development: Use `python -m src.cli` instead
+
 2. **Module not found**: Make sure you're in the correct directory and dependencies are installed
 
 ### Server Issues
 
-1. **Port already in use**: Use a different port: `python3 cli.py serve --port 8001`
+1. **Port already in use**: Use a different port: `csvgql-serve --port 8001`
 2. **Module errors**: Make sure all dependencies are installed correctly
+
+## 🎯 Command Quick Reference
+
+### Installed Commands
+```bash
+csvgql                       # Show main interface
+csvgql init-db              # Initialize database
+csvgql ingest               # Ingest CSV files
+csvgql serve                # Start GraphQL server
+csvgql preview              # Preview table data
+csvgql tables               # List available tables
+csvgql config-info          # Show current configuration
+```
+
+### Development Commands
+```bash
+python -m src.cli            # Main interface
+python -m src.cli init-db    # Initialize database
+python -m src.cli ingest     # Ingest CSV files
+python -m src.cli serve      # Start GraphQL server
+python -m src.cli preview    # Preview table data
+python -m src.cli tables     # List available tables
+python -m src.cli config-info # Show current configuration
+```
 
 ## 🎯 Next Steps
 
-- **🎨 Enjoy the beautiful interface** - Run `python3 cli.py` to see the main banner
+- **🎨 Enjoy the beautiful interface** - Run `csvgql` to see the main banner
 - **📊 Try ingesting your own CSV files** - Use different data sources
 - **🔍 Explore the GraphQL API** with different queries in the playground
 - **🚀 Build something awesome** with your CSV data

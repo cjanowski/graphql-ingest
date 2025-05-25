@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from strawberry.fastapi import GraphQLRouter
 from graphql_schema import schema
-from config import Config
+from config import Config  # type: ignore
 import uvicorn
 from typing import Optional, Dict, Any
 
@@ -9,7 +9,7 @@ from typing import Optional, Dict, Any
 app = FastAPI(
     title="CSV to PostgreSQL GraphQL API",
     description=(
-        "A GraphQL API for querying data ingested from CSV files into PostgreSQL"
+        "A GraphQL API for querying data ingested from CSV files " "into PostgreSQL"
     ),
     version="1.0.0",
 )

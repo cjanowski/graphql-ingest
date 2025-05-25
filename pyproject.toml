@@ -95,21 +95,26 @@ Repository = "https://github.com/coryjanowski/csv-graphql-cli"
 Changelog = "https://github.com/coryjanowski/csv-graphql-cli/releases"
 
 [project.scripts]
-csv-graphql = "cli:cli"
+# Primary CLI commands - using the CLI module directly
 csvgql = "cli:cli"
-csv-ingest = "cli:ingest"
-csv-serve = "cli:serve"
-csv-preview = "cli:preview"
-csv-tables = "cli:tables"
-csvgql-dev = "server:main"
+csv-graphql = "cli:cli"
+
+# Individual command shortcuts - these don't exist as separate entry points
+# Users should use: csvgql command-name or python -m src.cli command-name
 
 # Tool configurations
 [tool.setuptools_scm]
 write_to = "_version.py"
+fallback_version = "0.1.0"
 
 [tool.setuptools]
-py-modules = ["cli", "config", "database", "graphql_schema", "server"]
+# Updated to find packages in src directory
+packages = {find = {where = ["src"]}}
+py-modules = []
 include-package-data = true
+
+[tool.setuptools.package-dir]
+"" = "src"
 
 [tool.setuptools.package-data]
 "*" = ["*.md", "*.txt", "*.csv", "*.example", "LICENSE"]
@@ -140,12 +145,12 @@ extend-exclude = '''
 profile = "black"
 multi_line_output = 3
 line_length = 88
-known_first_party = ["cli", "config", "database", "graphql_schema", "server"]
+known_first_party = ["src"]
 
 # Flake8 configuration
 [tool.flake8]
 max-line-length = 88
-extend-ignore = ["E203", "W503", "F401", "W291"]
+extend-ignore = ["E203", "W503"]
 exclude = [".git", "__pycache__", "build", "dist", ".venv", "venv"]
 
 # MyPy configuration
@@ -166,12 +171,13 @@ python_classes = ["Test*"]
 python_functions = ["test_*"]
 asyncio_default_fixture_loop_scope = "function"
 
+
 # Coverage configuration
 [tool.coverage.run]
 source = ["src"]
 omit = [
     "tests/*",
-    "setup.py",
+    "tools/setup.py",
     "_version.py",
     ".venv/*",
     "venv/*",
