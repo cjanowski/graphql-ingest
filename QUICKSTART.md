@@ -12,23 +12,27 @@ This guide will help you get the **CSV to PostgreSQL GraphQL CLI** up and runnin
 
 ### 1. Install the Package
 
-#### Option A: Install from PyPI (Recommended)
+#### Option A: Install from Source (Recommended)
 ```bash
-pip install csv-graphql-cli
-```
-
-#### Option B: Install from Source (Development)
-```bash
-git clone https://github.com/yourusername/csv-graphql-cli.git
+git clone https://github.com/coryjanowski/csv-graphql-cli.git
 cd csv-graphql-cli
 pip install -e .
 ```
 
-#### Option C: Development Setup
+#### Option B: Development Setup (with all dependencies)
 ```bash
-git clone https://github.com/yourusername/csv-graphql-cli.git
+git clone https://github.com/coryjanowski/csv-graphql-cli.git
 cd csv-graphql-cli
 pip install -e ".[dev]"
+```
+
+#### Option C: Using Virtual Environment (Recommended)
+```bash
+git clone https://github.com/coryjanowski/csv-graphql-cli.git
+cd csv-graphql-cli
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -e .
 ```
 
 ### 2. Configure Database Connection
@@ -51,7 +55,12 @@ DB_PASSWORD=your_password
 
 ### 3. Test Database Connection
 
-#### Using Wrapper Script (Recommended)
+#### Using Installed Commands (Recommended)
+```bash
+csvgql init-db
+```
+
+#### Alternative: Using Wrapper Script
 ```bash
 python csvgql.py init-db
 ```
@@ -76,7 +85,43 @@ You should see a beautiful ASCII art banner followed by:
 
 ## 🚀 Basic Usage
 
-### Using Wrapper Script (Recommended)
+### Method 1: Using Installed Commands (Recommended)
+
+After running `pip install -e .`:
+
+#### 1. See the Beautiful Interface
+
+```bash
+csvgql
+```
+
+This shows the main banner and quick start guide with colorful styling!
+
+#### 2. Ingest Sample Data
+
+```bash
+csvgql ingest --file data/sample_data.csv --table employees
+```
+
+#### 3. View Tables
+
+```bash
+csvgql tables
+```
+
+#### 4. Preview Data
+
+```bash
+csvgql preview --table employees --limit 5
+```
+
+#### 5. Start GraphQL Server
+
+```bash
+csvgql serve
+```
+
+### Method 2: Using Wrapper Script
 
 #### 1. See the Beautiful Interface
 
@@ -110,7 +155,7 @@ python csvgql.py preview --table employees --limit 5
 python csvgql.py serve
 ```
 
-### Alternative: Development Commands (from source)
+### Method 3: Development Commands (Direct Module)
 
 #### 1. See the Beautiful Interface
 
@@ -236,7 +281,7 @@ Configuration files are now organized in the `config/` directory:
 
 ## 🎯 Command Quick Reference
 
-### Installed Commands
+### Installed Commands (after pip install -e .)
 ```bash
 csvgql                       # Show main interface
 csvgql init-db              # Initialize database
@@ -247,7 +292,18 @@ csvgql tables               # List available tables
 csvgql config-info          # Show current configuration
 ```
 
-### Development Commands
+### Wrapper Script Commands
+```bash
+python csvgql.py             # Show main interface
+python csvgql.py init-db     # Initialize database
+python csvgql.py ingest      # Ingest CSV files
+python csvgql.py serve       # Start GraphQL server
+python csvgql.py preview     # Preview table data
+python csvgql.py tables      # List available tables
+python csvgql.py config-info # Show current configuration
+```
+
+### Direct Module Commands (Development)
 ```bash
 python -m src.cli            # Main interface
 python -m src.cli init-db    # Initialize database

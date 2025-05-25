@@ -95,7 +95,7 @@ Repository = "https://github.com/coryjanowski/csv-graphql-cli"
 Changelog = "https://github.com/coryjanowski/csv-graphql-cli/releases"
 
 [project.scripts]
-# Primary CLI commands - using the CLI module directly
+# Primary CLI commands - using the CLI module
 csvgql = "cli:cli"
 csv-graphql = "cli:cli"
 
