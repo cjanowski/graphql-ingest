@@ -88,11 +88,11 @@ all = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/coryjanowski/csv-graphql-cli"
-Documentation = "https://github.com/coryjanowski/csv-graphql-cli#readme"
-Repository = "https://github.com/coryjanowski/csv-graphql-cli"
-"Bug Tracker" = "https://github.com/coryjanowski/csv-graphql-cli/issues"
-Changelog = "https://github.com/coryjanowski/csv-graphql-cli/releases"
+Homepage = "https://github.com/cjanowski/csv-graphql-cli"
+Documentation = "https://github.com/cjanowski/csv-graphql-cli#readme"
+Repository = "https://github.com/cjanowski/csv-graphql-cli"
+"Bug Tracker" = "https://github.com/cjanowski/csv-graphql-cli/issues"
+Changelog = "https://github.com/cjanowski/csv-graphql-cli/releases"
 
 [project.scripts]
 # Primary CLI commands - using the CLI module

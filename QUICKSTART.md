@@ -14,21 +14,21 @@ This guide will help you get the **CSV to PostgreSQL GraphQL CLI** up and runnin
 
 #### Option A: Install from Source (Recommended)
 ```bash
-git clone https://github.com/coryjanowski/csv-graphql-cli.git
+git clone https://github.com/cjanowski/csv-graphql-cli.git
 cd csv-graphql-cli
 pip install -e .
 ```
 
 #### Option B: Development Setup (with all dependencies)
 ```bash
-git clone https://github.com/coryjanowski/csv-graphql-cli.git
+git clone https://github.com/cjanowski/csv-graphql-cli.git
 cd csv-graphql-cli
 pip install -e ".[dev]"
 ```
 
 #### Option C: Using Virtual Environment (Recommended)
 ```bash
-git clone https://github.com/coryjanowski/csv-graphql-cli.git
+git clone https://github.com/cjanowski/csv-graphql-cli.git
 cd csv-graphql-cli
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate

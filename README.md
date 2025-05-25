@@ -42,7 +42,7 @@
 
 ```bash
 # From source (recommended - package not yet on PyPI)
-git clone https://github.com/coryjanowski/csv-graphql-cli.git
+git clone https://github.com/cjanowski/csv-graphql-cli.git
 cd csv-graphql-cli
 pip install -e .
 
@@ -340,21 +340,21 @@ docker run -p 8000:8000 csv-graphql-cli
 
 ### Option 1: Install from Source (Recommended)
 ```bash
-git clone https://github.com/coryjanowski/csv-graphql-cli.git
+git clone https://github.com/cjanowski/csv-graphql-cli.git
 cd csv-graphql-cli
 pip install -e .
 ```
 
 ### Option 2: Development Setup
 ```bash
-git clone https://github.com/coryjanowski/csv-graphql-cli.git
+git clone https://github.com/cjanowski/csv-graphql-cli.git
 cd csv-graphql-cli
 pip install -e ".[dev]"
 ```
 
 ### Option 3: Using Virtual Environment (Recommended)
 ```bash
-git clone https://github.com/coryjanowski/csv-graphql-cli.git
+git clone https://github.com/cjanowski/csv-graphql-cli.git
 cd csv-graphql-cli
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
