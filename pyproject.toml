@@ -96,8 +96,8 @@ Changelog = "https://github.com/cjanowski/graphql-ingest/releases"
 
 [project.scripts]
 # Primary CLI commands - using the CLI module
-csvgql = "cli:cli"
-csv-graphql = "cli:cli"
+csvgql = "src.cli:cli"
+csv-graphql = "src.cli:cli"
 
 # Individual command shortcuts - these don't exist as separate entry points
 # Users should use: csvgql command-name or python -m src.cli command-name
