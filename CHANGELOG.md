@@ -58,8 +58,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Links
 
-- [Project Repository](https://github.com/yourusername/graphql-csv-ingest)
-- [Issue Tracker](https://github.com/yourusername/graphql-csv-ingest/issues)
+- [Project Repository](../../)
+- [Issue Tracker](../../issues)
 - [Documentation](./docs/)
 - [Examples](./examples/)
 

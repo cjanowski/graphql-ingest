@@ -1,19 +1,14 @@
-# 🍓 CSV GraphQL CLI
+# 🍓 GraphQL CSV Ingest
 
 <div align="center">
-
-![CSV GraphQL CLI Logo](docs/assets/logo-banner.png)
 
 **Transform your CSV data into powerful GraphQL APIs in minutes!**
 
 [![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)](https://python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PyPI version](https://badge.fury.io/py/csv-graphql-cli.svg)](https://badge.fury.io/py/csv-graphql-cli)
-[![GitHub issues](https://img.shields.io/github/issues/coryjanowski/csv-graphql-cli.svg)](https://github.com/coryjanowski/csv-graphql-cli/issues)
-[![GitHub stars](https://img.shields.io/github/stars/coryjanowski/csv-graphql-cli.svg)](https://github.com/coryjanowski/csv-graphql-cli/stargazers)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-[📖 Documentation](docs/) • [🚀 Quick Start](#-quick-start) • [💻 Examples](examples/) • [🤝 Contributing](CONTRIBUTING.md)
+[📖 Documentation](docs/) • [🚀 Quick Start](#-quick-start) • [💻 Examples](examples/) • [🤝 Contributing](CONTRIBUTE.md)
 
 </div>
 
@@ -37,12 +32,12 @@
 ### Installation
 
 ```bash
-# From PyPI (recommended)
-pip install csv-graphql-cli
+# From PyPI (when published)
+pip install graphql-csv-ingest
 
 # From source
-git clone https://github.com/coryjanowski/csv-graphql-cli.git
-cd csv-graphql-cli
+git clone https://github.com/yourusername/graphql-csv-ingest.git
+cd graphql-csv-ingest
 pip install -e .
 ```
 
@@ -66,7 +61,7 @@ csvgql serve
 
 ## 🎬 Demo
 
-![CLI Demo](docs/assets/demo.gif)
+_Demo GIF coming soon - showing the beautiful CLI interface in action!_
 
 ## 📊 Example Workflow
 
@@ -74,23 +69,23 @@ csvgql serve
 # Beautiful ASCII art welcome screen
 csvgql
 
-# Multiple command aliases available
-csv-graphql init-db     # Full command
-csvgql init-db          # Short alias  
-csv-ingest -f data.csv  # Direct command
-csvgql-dev              # Development server
+# Complete workflow example
+csvgql init-db                    # Initialize database
+csvgql ingest -f data.csv -t users # Ingest CSV data
+csvgql preview -t users           # Preview the data
+csvgql serve                      # Start GraphQL server
 ```
 
 ## 🔧 CLI Commands
 
-| Command | Alias | Description |
-|---------|-------|-------------|
-| `csvgql` | `csv-graphql` | Main CLI with beautiful interface |
-| `csv-ingest` | - | Direct CSV ingestion |
-| `csv-serve` | - | Direct server startup |
-| `csv-preview` | - | Direct data preview |
-| `csv-tables` | - | Direct table listing |
-| `csvgql-dev` | - | Development server with auto-reload |
+| Command | Description |
+|---------|-------------|
+| `csvgql` | Main CLI with beautiful interface |
+| `csvgql init-db` | Initialize database connection |
+| `csvgql ingest` | Ingest CSV files into database |
+| `csvgql serve` | Start GraphQL server |
+| `csvgql preview` | Preview table data |
+| `csvgql tables` | List available tables |
 
 ## 🔍 GraphQL Queries
 
@@ -149,13 +144,16 @@ DEBUG=false
 ## 📁 Project Structure
 
 ```
-csv-graphql-cli/
+graphql-csv-ingest/
 ├── src/                    # 📦 Main application code
 ├── tests/                  # 🧪 Test suite
 ├── examples/               # 📋 Usage examples
 ├── docs/                   # 📚 Documentation
 ├── docker/                 # 🐳 Docker configuration
-└── .github/               # 🐙 GitHub workflows
+├── .github/                # 🐙 GitHub workflows
+├── CONTRIBUTE.md           # 🤝 Contribution guidelines
+├── CHANGELOG.md            # 📋 Change log
+└── README.md               # 📖 Project overview
 ```
 
 ## 🧪 Testing
@@ -178,8 +176,8 @@ pytest tests/test_cli.py
 docker-compose up
 
 # Or use the Dockerfile directly
-docker build -t csv-graphql-cli .
-docker run -p 8000:8000 csv-graphql-cli
+docker build -t graphql-csv-ingest .
+docker run -p 8000:8000 graphql-csv-ingest
 ```
 
 ## 🤝 Contributing
@@ -198,7 +196,7 @@ We welcome contributions! See [CONTRIBUTE.md](CONTRIBUTE.md) for guidelines.
 - **PostgreSQL**: 12 or higher  
 - **Dependencies**: See [requirements.txt](requirements.txt)
 
-## 🏆 Why CSV GraphQL CLI?
+## 🏆 Why GraphQL CSV Ingest?
 
 ✅ **Professional Grade**: Enterprise-ready with comprehensive error handling  
 ✅ **Beautiful UX**: Stunning CLI interface that developers love  
@@ -221,8 +219,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-**[⭐ Star this repo](https://github.com/coryjanowski/csv-graphql-cli/stargazers)** • **[🐛 Report Bug](https://github.com/coryjanowski/csv-graphql-cli/issues)** • **[💡 Request Feature](https://github.com/coryjanowski/csv-graphql-cli/issues)**
+**[⭐ Star this repo](#)** • **[🐛 Report Bug](../../issues)** • **[💡 Request Feature](../../issues)**
 
-Made with 🍓 by [Cory Janowski](https://github.com/coryjanowski)
+Made with 🍓 and ❤️ for the developer community
 
 </div> 
