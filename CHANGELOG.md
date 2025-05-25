@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated GitHub Actions workflow (upload-artifact@v3 → @v4)
 - Improved dependency management using pyproject.toml
 - Restructured tests (separated unit tests from integration tests)
+- **BREAKING**: Dropped Python 3.8 support (minimum Python 3.9+)
+- Updated security scan command (safety check → safety scan)
 
 ### Deprecated
 - Nothing
@@ -36,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Nothing
 
-## [1.0.0] - 2024-01-01
+## [1.0.0] - 2025-05-25
 
 ### Added
 - Initial release of GraphQL CSV Ingest CLI

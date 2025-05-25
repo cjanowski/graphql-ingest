@@ -2,6 +2,15 @@
 
 <div align="center">
 
+```
+  ____                 _      ____  _        ____ ______     __  ___                 _   
+ / ___|_ __ __ _ _ __ | |__  / __ \| |      / ___/ ___\ \   / / |_ _|_ __   __ _  __| |_ 
+| |  _| '__/ _` | '_ \| '_ \| |  | | |     | |   \___ \\ \ / /   | || '_ \ / _` |/ _` (_)
+| |_| | | | (_| | |_) | | | | |__| | |___  | |___ ___) |\ V /    | || | | | (_| | (_| |_ 
+ \____|_|  \__,_| .__/|_| |_|\___\_\_____|  \____|____/  \_/    |___|_| |_|\__, |\__,_(_)
+                |_|                                                         |___/        
+```
+
 **Transform your CSV data into powerful GraphQL APIs in minutes!**
 
 [![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)](https://python.org/downloads/)
@@ -203,7 +212,7 @@ We welcome contributions! See [CONTRIBUTE.md](CONTRIBUTE.md) for guidelines.
 
 ## 📋 Requirements
 
-- **Python**: 3.8 or higher
+- **Python**: 3.9 or higher
 - **PostgreSQL**: 12 or higher  
 - **Dependencies**: See [requirements.txt](requirements.txt)
 

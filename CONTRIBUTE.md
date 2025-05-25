@@ -6,7 +6,7 @@ Thank you for your interest in contributing to GraphQL CSV Ingest! We welcome co
 
 ### Prerequisites
 
-- Python 3.8+
+- Python 3.9+
 - PostgreSQL 12+
 - Git
 - Virtual environment tool (venv, virtualenv, conda, etc.)
