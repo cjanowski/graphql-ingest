@@ -13,7 +13,9 @@
 
 **Transform your CSV data into powerful GraphQL APIs in minutes!**
 
+[![PyPI version](https://img.shields.io/pypi/v/csv-graphql-cli.svg)](https://pypi.org/project/csv-graphql-cli/)
 [![Python Version](https://img.shields.io/badge/python-3.9+-blue.svg)](https://python.org/downloads/)
+[![PyPI downloads](https://img.shields.io/pypi/dm/csv-graphql-cli.svg)](https://pypi.org/project/csv-graphql-cli/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
@@ -34,30 +36,30 @@
 - 🚀 **FastAPI Server**: High-performance async web server
 - 🎯 **Multiple Entry Points**: Multiple CLI commands for convenience
 - 🛠️ **Developer Friendly**: Type hints, comprehensive error handling
-- 📦 **Easy Installation**: pip-installable with all dependencies
+- 📦 **Easy Installation**: Available on PyPI with all dependencies
 
 ## 🚀 Quick Start
 
 ### Installation
 
 ```bash
-# From source (recommended - package not yet on PyPI)
-git clone https://github.com/cjanowski/graphql-ingest.git
-cd graphql-ingest
-pip install -e .
+# 🎉 Install from PyPI (Recommended)
+pip install csv-graphql-cli
 
-# For development with all dev dependencies
-pip install -e ".[dev]"
-
-# Create virtual environment (recommended)
+# 🔧 Or install in a virtual environment
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -e .
+pip install csv-graphql-cli
+
+# 🛠️ Development installation from source
+git clone https://github.com/cjanowski/graphql-ingest.git
+cd graphql-ingest
+pip install -e ".[dev]"
 ```
 
 ### Quick Start - Method 1: Using Installed Commands (Recommended)
 
-After running `pip install -e .`:
+After running `pip install csv-graphql-cli`:
 
 ```bash
 # 1️⃣ Show the main interface and available commands
@@ -128,14 +130,14 @@ _Demo GIF coming soon - showing the beautiful CLI interface in action!_
 ## 📊 Example Workflow
 
 ```bash
-# Using installed commands (after pip install -e .)
+# Using installed package (after pip install csv-graphql-cli)
 csvgql                                    # Show main interface
 csvgql init-db                           # Initialize database
 csvgql ingest -f data.csv -t users       # Ingest CSV data
 csvgql preview -t users                  # Preview the data
 csvgql serve                             # Start GraphQL server
 
-# OR using wrapper script
+# OR using wrapper script (development)
 python csvgql.py                         # Show main interface
 python csvgql.py init-db                 # Initialize database
 python csvgql.py ingest -f data.csv -t users  # Ingest CSV data
@@ -145,9 +147,9 @@ python csvgql.py serve                   # Start GraphQL server
 
 ## 🔧 CLI Commands
 
-### Method 1: Using Installed Commands (Recommended)
+### Method 1: Using Installed Package (Recommended)
 
-After running `pip install -e .`:
+After running `pip install csv-graphql-cli`:
 
 ```bash
 csvgql                               # Show main interface
@@ -193,17 +195,17 @@ python csvgql.py config-info        # Show configuration
 
 | Method | Command | Description |
 |--------|---------|-------------|
-| **Installed** | `csvgql` | Main CLI interface (shows all commands) |
-| **Installed** | `csvgql init-db` | Initialize database |
-| **Installed** | `csvgql ingest` | Ingest CSV files |
-| **Installed** | `csvgql serve` | Start GraphQL server |
-| **Installed** | `csvgql preview` | Preview table data |
-| **Installed** | `csvgql tables` | List available tables |
-| **Installed** | `csvgql config-info` | Show current configuration |
-| **Wrapper** | `python csvgql.py` | Main CLI interface |
-| **Wrapper** | `python csvgql.py init-db` | Initialize database |
-| **Direct** | `python -m src.cli` | Main CLI interface |
-| **Direct** | `python -m src.cli init-db` | Initialize database |
+| **PyPI Package** | `csvgql` | Main CLI interface (shows all commands) |
+| **PyPI Package** | `csvgql init-db` | Initialize database |
+| **PyPI Package** | `csvgql ingest` | Ingest CSV files |
+| **PyPI Package** | `csvgql serve` | Start GraphQL server |
+| **PyPI Package** | `csvgql preview` | Preview table data |
+| **PyPI Package** | `csvgql tables` | List available tables |
+| **PyPI Package** | `csvgql config-info` | Show current configuration |
+| **Development** | `python csvgql.py` | Main CLI interface |
+| **Development** | `python csvgql.py init-db` | Initialize database |
+| **Development** | `python -m src.cli` | Main CLI interface |
+| **Development** | `python -m src.cli init-db` | Initialize database |
 
 ## 🔍 GraphQL Queries
 
@@ -338,27 +340,23 @@ docker run -p 8000:8000 csv-graphql-cli
 
 ## 🚀 Installation Options
 
-### Option 1: Install from Source (Recommended)
+### Option 1: Install from PyPI (Recommended) 🎉
 ```bash
-git clone https://github.com/cjanowski/graphql-ingest.git
-cd graphql-ingest
-pip install -e .
+pip install csv-graphql-cli
 ```
 
-### Option 2: Development Setup
+### Option 2: Install in Virtual Environment
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install csv-graphql-cli
+```
+
+### Option 3: Development Setup
 ```bash
 git clone https://github.com/cjanowski/graphql-ingest.git
 cd graphql-ingest
 pip install -e ".[dev]"
-```
-
-### Option 3: Using Virtual Environment (Recommended)
-```bash
-git clone https://github.com/cjanowski/graphql-ingest.git
-cd graphql-ingest
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -e .
 ```
 
 ## 📋 Requirements
