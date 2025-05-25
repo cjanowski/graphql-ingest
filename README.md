@@ -27,7 +27,7 @@
 
 🔥 **Professional Data Pipeline in Your Terminal**
 
-- 🍓 **Beautiful CLI**: Stunning ASCII art and colorful interface
+- 🍓 **Beautiful CLI**: Fun ASCII art and colorful interface
 - 📊 **Smart CSV Ingestion**: Automatic schema detection and type inference
 - 🐘 **PostgreSQL Integration**: Seamless database operations
 - 🔍 **GraphQL API**: Modern, flexible data querying
@@ -89,7 +89,7 @@ csvgql serve                      # Start GraphQL server
 
 | Command | Description |
 |---------|-------------|
-| `csvgql` | Main CLI with beautiful interface |
+| `csvgql` | Main CLI with fun interface |
 | `csvgql init-db` | Initialize database connection |
 | `csvgql ingest` | Ingest CSV files into database |
 | `csvgql serve` | Start GraphQL server |

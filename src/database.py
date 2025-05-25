@@ -15,7 +15,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 import pandas as pd
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Union
 import logging
 from config import Config
 
@@ -33,11 +33,11 @@ metadata = MetaData()
 class DatabaseManager:
     """Manages database operations including table creation and data ingestion."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.engine = engine
         self.metadata = metadata
 
-    def create_database_if_not_exists(self):
+    def create_database_if_not_exists(self) -> bool:
         """Create database if it doesn't exist."""
         try:
             # Test connection
@@ -48,7 +48,7 @@ class DatabaseManager:
             logger.error(f"Database connection failed: {e}")
             return False
 
-    def infer_column_type(self, series: pd.Series):
+    def infer_column_type(self, series: pd.Series) -> Any:
         """Infer SQLAlchemy column type from pandas Series."""
         if pd.api.types.is_integer_dtype(series):
             return Integer

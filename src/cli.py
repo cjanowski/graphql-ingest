@@ -15,6 +15,7 @@ from server import start_server
 from config import Config
 import logging
 from sqlalchemy import text
+from typing import Optional
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -67,12 +68,12 @@ SERVER_ART = """
 """
 
 
-def print_banner():
+def print_banner() -> None:
     """Print the CLI banner."""
     click.echo(click.style(BANNER, fg="cyan", bold=True))
 
 
-def print_divider(style="normal"):
+def print_divider(style: str = "normal") -> None:
     """Print a visual divider."""
     if style == "fancy":
         click.echo(click.style(FANCY_DIVIDER, fg="blue"))
@@ -82,29 +83,29 @@ def print_divider(style="normal"):
         click.echo(click.style(DIVIDER, fg="blue"))
 
 
-def print_mini_art(art_type):
+def print_mini_art(art_type: str) -> None:
     """Print mini ASCII art for different contexts."""
     art_map = {"init": INIT_ART, "ingest": INGEST_ART, "server": SERVER_ART}
     if art_type in art_map:
         click.echo(click.style(art_map[art_type], fg="magenta", bold=True))
 
 
-def print_success(message):
+def print_success(message: str) -> None:
     """Print a success message with style."""
     click.echo(click.style(f"✅ {message}", fg="green", bold=True))
 
 
-def print_error(message):
+def print_error(message: str) -> None:
     """Print an error message with style."""
     click.echo(click.style(f"❌ {message}", fg="red", bold=True))
 
 
-def print_warning(message):
+def print_warning(message: str) -> None:
     """Print a warning message with style."""
     click.echo(click.style(f"⚠️  {message}", fg="yellow", bold=True))
 
 
-def print_info(message):
+def print_info(message: str) -> None:
     """Print an info message with style."""
     click.echo(click.style(f"ℹ️  {message}", fg="blue"))
 
@@ -112,10 +113,11 @@ def print_info(message):
 @click.group(invoke_without_command=True)
 @click.version_option(version="1.0.0", prog_name="CSV GraphQL CLI")
 @click.pass_context
-def cli(ctx):
+def cli(ctx: click.Context) -> None:
     """CSV to PostgreSQL GraphQL CLI
 
-    A powerful tool for ingesting CSV files into PostgreSQL and serving data via GraphQL.
+    A powerful tool for ingesting CSV files into PostgreSQL and serving data
+    via GraphQL.
     """
     if ctx.invoked_subcommand is None:
         print_banner()
@@ -167,7 +169,7 @@ def cli(ctx):
 
 
 @cli.command()
-def init_db():
+def init_db() -> None:
     """Initialize database connection and test connectivity."""
     print_banner()
     print_divider("fancy")
@@ -210,7 +212,7 @@ def init_db():
     "--table", "-t", required=True, help="Name of the table to create/insert into"
 )
 @click.option("--replace", is_flag=True, help="Replace table if it already exists")
-def ingest(file, table, replace):
+def ingest(file: str, table: str, replace: bool) -> None:
     """Ingest a CSV file into PostgreSQL."""
     file_path = Path(file).resolve()
 
@@ -288,7 +290,7 @@ def ingest(file, table, replace):
     help=f"Port to bind the server (default: {Config.SERVER_PORT})",
 )
 @click.option("--reload", is_flag=True, help="Enable auto-reload for development")
-def serve(host, port, reload):
+def serve(host: Optional[str], port: Optional[int], reload: bool) -> None:
     """Start the GraphQL API server."""
     host = host or Config.SERVER_HOST
     port = port or Config.SERVER_PORT
@@ -349,7 +351,7 @@ def serve(host, port, reload):
 
 
 @cli.command()
-def tables():
+def tables() -> None:
     """List all tables in the database."""
     click.echo("📋 Database Tables:")
 
@@ -375,7 +377,7 @@ def tables():
 @cli.command()
 @click.option("--table", "-t", required=True, help="Table name to query")
 @click.option("--limit", "-l", default=10, help="Number of rows to display")
-def preview(table, limit):
+def preview(table: str, limit: int) -> None:
     """Preview data from a table."""
     click.echo(f"👀 Previewing table: {table} (limit: {limit})")
 
@@ -410,7 +412,7 @@ def preview(table, limit):
 
 
 @cli.command()
-def config_info():
+def config_info() -> None:
     """Display current configuration."""
     click.echo("⚙️  Current Configuration:")
     click.echo(f"🗄️  Database URL: {Config.DATABASE_URL}")

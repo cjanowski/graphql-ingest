@@ -85,10 +85,17 @@ class Query:
     @strawberry.field
     def table_schema(self, table_name: str) -> Optional[TableInfo]:
         """Get schema information for a specific table."""
-        tables = self.tables()
-        for table in tables:
-            if table.name == table_name:
-                return table
+        tables_data = db_manager.get_tables()
+
+        for table_data in tables_data:
+            if table_data["name"] == table_name:
+                columns = [
+                    ColumnInfo(
+                        name=col["name"], type=col["type"], nullable=col["nullable"]
+                    )
+                    for col in table_data["columns"]
+                ]
+                return TableInfo(name=table_data["name"], columns=columns)
         return None
 
 

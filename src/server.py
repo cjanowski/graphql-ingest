@@ -3,11 +3,14 @@ from strawberry.fastapi import GraphQLRouter
 from graphql_schema import schema
 from config import Config
 import uvicorn
+from typing import Optional, Dict, Any
 
 # Create FastAPI app
 app = FastAPI(
     title="CSV to PostgreSQL GraphQL API",
-    description="A GraphQL API for querying data ingested from CSV files into PostgreSQL",
+    description=(
+        "A GraphQL API for querying data ingested from CSV files into PostgreSQL"
+    ),
     version="1.0.0",
 )
 
@@ -19,7 +22,7 @@ app.include_router(graphql_app, prefix="/graphql")
 
 
 @app.get("/")
-async def root():
+async def root() -> Dict[str, Any]:
     """Root endpoint with API information."""
     return {
         "message": "CSV to PostgreSQL GraphQL API",
@@ -33,12 +36,14 @@ async def root():
 
 
 @app.get("/health")
-async def health_check():
+async def health_check() -> Dict[str, str]:
     """Health check endpoint."""
     return {"status": "healthy"}
 
 
-def start_server(host: str = None, port: int = None, reload: bool = False):
+def start_server(
+    host: Optional[str] = None, port: Optional[int] = None, reload: bool = False
+) -> None:
     """Start the FastAPI server with Uvicorn."""
     host = host or Config.SERVER_HOST
     port = port or Config.SERVER_PORT
@@ -46,7 +51,7 @@ def start_server(host: str = None, port: int = None, reload: bool = False):
     uvicorn.run("server:app", host=host, port=port, reload=reload, log_level="info")
 
 
-def main():
+def main() -> None:
     """Main entry point for direct server startup."""
     start_server(reload=True)
 
