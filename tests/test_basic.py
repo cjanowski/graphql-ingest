@@ -2,7 +2,8 @@
 """
 Basic unit tests for GraphQL CSV Ingest
 
-These tests verify that the core components can be imported and basic functionality works.
+These tests verify that the core components can be imported and basic
+functionality works.
 """
 
 import pytest
@@ -74,7 +75,9 @@ def test_github_templates():
 
     for template in templates:
         template_path = github_dir / template
-        assert template_path.exists(), f"Missing GitHub template: {template}"
+        assert template_path.exists(), (
+            f"Missing GitHub template: {template}"
+        )
 
 
 def test_documentation_structure():
@@ -109,7 +112,9 @@ def test_file_contents(file_name, expected_content):
     content = file_path.read_text(encoding="utf-8")
     assert (
         expected_content in content
-    ), f"Expected content '{expected_content}' not found in {file_name}"
+    ), (
+        f"Expected content '{expected_content}' not found in {file_name}"
+    )
 
 
 def test_sample_data():
@@ -149,7 +154,9 @@ class TestProjectConfiguration:
         ]
 
         for section in essential_sections:
-            assert section in content, f"Missing section in pyproject.toml: {section}"
+            assert section in content, (
+                f"Missing section in pyproject.toml: {section}"
+            )
 
     def test_requirements_file(self):
         """Test that requirements.txt has the expected dependencies."""
@@ -171,7 +178,9 @@ class TestProjectConfiguration:
         ]
 
         for dep in essential_deps:
-            assert dep in content, f"Missing dependency in requirements.txt: {dep}"
+            assert dep in content, (
+                f"Missing dependency in requirements.txt: {dep}"
+            )
 
 
 if __name__ == "__main__":

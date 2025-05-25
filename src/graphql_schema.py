@@ -56,20 +56,31 @@ class Query:
         tables = []
         for table_data in tables_data:
             columns = [
-                ColumnInfo(name=col["name"], type=col["type"], nullable=col["nullable"])
+                ColumnInfo(
+                    name=col["name"],
+                    type=col["type"],
+                    nullable=col["nullable"]
+                )
                 for col in table_data["columns"]
             ]
 
-            tables.append(TableInfo(name=table_data["name"], columns=columns))
+            tables.append(
+                TableInfo(name=table_data["name"], columns=columns)
+            )
 
         return tables
 
     @strawberry.field
     def table_data(
-        self, table_name: str, limit: Optional[int] = 100, offset: Optional[int] = 0
+        self,
+        table_name: str,
+        limit: Optional[int] = 100,
+        offset: Optional[int] = 0
     ) -> TableDataResponse:
         """Get data from a specific table."""
-        result = db_manager.get_table_data(table_name, limit or 100, offset or 0)
+        result = db_manager.get_table_data(
+            table_name, limit or 100, offset or 0
+        )
 
         if result["success"]:
             return TableDataResponse(
@@ -91,7 +102,9 @@ class Query:
             if table_data["name"] == table_name:
                 columns = [
                     ColumnInfo(
-                        name=col["name"], type=col["type"], nullable=col["nullable"]
+                        name=col["name"],
+                        type=col["type"],
+                        nullable=col["nullable"]
                     )
                     for col in table_data["columns"]
                 ]
@@ -104,7 +117,9 @@ class Mutation:
     """GraphQL Mutation root type."""
 
     @strawberry.field
-    def ingest_csv(self, file_path: str, table_name: str) -> IngestionResult:
+    def ingest_csv(
+        self, file_path: str, table_name: str
+    ) -> IngestionResult:
         """Ingest a CSV file into the database."""
         result = db_manager.ingest_csv(file_path, table_name)
 

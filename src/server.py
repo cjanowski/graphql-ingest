@@ -9,7 +9,8 @@ from typing import Optional, Dict, Any
 app = FastAPI(
     title="CSV to PostgreSQL GraphQL API",
     description=(
-        "A GraphQL API for querying data ingested from CSV files " "into PostgreSQL"
+        "A GraphQL API for querying data ingested from CSV files "
+        "into PostgreSQL"
     ),
     version="1.0.0",
 )
@@ -42,13 +43,17 @@ async def health_check() -> Dict[str, str]:
 
 
 def start_server(
-    host: Optional[str] = None, port: Optional[int] = None, reload: bool = False
+    host: Optional[str] = None,
+    port: Optional[int] = None,
+    reload: bool = False
 ) -> None:
     """Start the FastAPI server with Uvicorn."""
     host = host or Config.SERVER_HOST
     port = port or Config.SERVER_PORT
 
-    uvicorn.run("server:app", host=host, port=port, reload=reload, log_level="info")
+    uvicorn.run(
+        "server:app", host=host, port=port, reload=reload, log_level="info"
+    )
 
 
 def main() -> None:
