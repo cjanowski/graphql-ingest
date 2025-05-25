@@ -15,7 +15,7 @@ from server import start_server
 from config import Config  # type: ignore
 import logging
 from sqlalchemy import text
-from typing import Optional
+from typing import Optional, Any
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -293,7 +293,7 @@ def ingest(file: str, table: str, replace: bool) -> None:
     # Perform ingestion
     with click.progressbar(
         length=1, label=click.style("Processing CSV", fg="cyan")
-    ) as bar:
+    ) as bar:  # type: Any
         result = db_manager.ingest_csv(str(file_path), table)
         bar.update(1)
 
