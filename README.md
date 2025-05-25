@@ -158,6 +158,17 @@ graphql-csv-ingest/
 
 ## 🧪 Testing
 
+### Setup Testing Environment
+```bash
+# Create virtual environment (recommended)
+python3 -m venv venv
+source venv/bin/activate
+
+# Install with development dependencies
+pip install -e ".[dev]"
+```
+
+### Run Tests
 ```bash
 # Run all tests
 pytest
@@ -165,8 +176,8 @@ pytest
 # Run with coverage
 pytest --cov=src
 
-# Run specific test
-pytest tests/test_cli.py
+# Run with verbose output
+pytest -v
 ```
 
 ## 🐳 Docker Support

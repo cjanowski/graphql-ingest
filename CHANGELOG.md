@@ -12,10 +12,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CONTRIBUTE.md with detailed contribution guidelines
 - GitHub issue and pull request templates
 - Professional repository organization
+- Comprehensive unit tests for project validation
+- Virtual environment setup for development
+- Updated CI/CD pipeline with latest GitHub Actions
 
 ### Changed
 - Updated project structure for better maintainability
 - Enhanced documentation organization
+- Fixed broken GitHub links (404 errors)
+- Updated GitHub Actions workflow (upload-artifact@v3 → @v4)
+- Improved dependency management using pyproject.toml
+- Restructured tests (separated unit tests from integration tests)
 
 ### Deprecated
 - Nothing

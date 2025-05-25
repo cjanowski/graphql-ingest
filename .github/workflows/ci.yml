@@ -34,12 +34,12 @@ jobs:
       uses: actions/checkout@v4
 
     - name: 🐍 Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
 
     - name: 📋 Cache dependencies
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
@@ -49,9 +49,7 @@ jobs:
     - name: 📦 Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install pytest pytest-cov pytest-asyncio black flake8 mypy
-        pip install -e .
+        pip install -e ".[dev]"
 
     - name: 🎨 Code formatting check
       run: |
@@ -76,7 +74,7 @@ jobs:
         pytest tests/ -v --cov=src --cov-report=xml --cov-report=term-missing
 
     - name: 📊 Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v5
       with:
         file: ./coverage.xml
         flags: unittests
@@ -92,7 +90,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: 🐍 Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: "3.11"
 
@@ -110,7 +108,7 @@ jobs:
         twine check dist/*
 
     - name: 📄 Upload build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: python-package-distributions
         path: dist/
@@ -124,7 +122,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: 🐍 Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: "3.11"
 
@@ -142,7 +140,7 @@ jobs:
         bandit -r src/ -f json -o bandit-report.json
 
     - name: 📊 Upload security report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: security-report
@@ -157,7 +155,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: 🐍 Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: "3.11"
 
@@ -174,7 +172,7 @@ jobs:
         echo "Documentation build placeholder" > docs/_build/index.html
 
     - name: 📄 Upload docs
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: documentation
         path: docs/_build/ 
