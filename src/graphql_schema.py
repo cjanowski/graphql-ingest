@@ -76,9 +76,7 @@ class Query:
         offset: Optional[int] = 0,
     ) -> TableDataResponse:
         """Get data from a specific table."""
-        result = db_manager.get_table_data(
-            table_name, limit or 100, offset or 0
-        )
+        result = db_manager.get_table_data(table_name, limit or 100, offset or 0)
 
         if result["success"]:
             return TableDataResponse(

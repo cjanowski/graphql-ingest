@@ -150,9 +150,7 @@ class TestProjectConfiguration:
         ]
 
         for section in essential_sections:
-            assert (
-                section in content
-            ), f"Missing section in pyproject.toml: {section}"
+            assert section in content, f"Missing section in pyproject.toml: {section}"
 
     def test_requirements_file(self):
         """Test that requirements.txt has the expected dependencies."""
@@ -174,9 +172,7 @@ class TestProjectConfiguration:
         ]
 
         for dep in essential_deps:
-            assert (
-                dep in content
-            ), f"Missing dependency in requirements.txt: {dep}"
+            assert dep in content, f"Missing dependency in requirements.txt: {dep}"
 
 
 if __name__ == "__main__":
