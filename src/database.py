@@ -59,10 +59,14 @@ class DatabaseManager:
             return DateTime
         else:
             # For strings, use Text for longer content, String for shorter
-            max_length = series.astype(str).str.len().max() if not series.empty else 0
+            max_length = (
+                series.astype(str).str.len().max() if not series.empty else 0
+            )
             return Text if max_length > 255 else String(255)
 
-    def create_table_from_dataframe(self, df: pd.DataFrame, table_name: str) -> Table:
+    def create_table_from_dataframe(
+        self, df: pd.DataFrame, table_name: str
+    ) -> Table:
         """Create a SQLAlchemy table based on DataFrame structure."""
         columns = []
 
@@ -71,7 +75,9 @@ class DatabaseManager:
 
         if not has_id_column:
             # Add auto-incrementing id column if CSV doesn't have one
-            id_col = Column("id", Integer, primary_key=True, autoincrement=True)
+            id_col = Column(
+                "id", Integer, primary_key=True, autoincrement=True
+            )
             columns.append(id_col)
 
         for col_name in df.columns:
@@ -83,7 +89,9 @@ class DatabaseManager:
             else:
                 columns.append(Column(col_name, col_type))
 
-        table = Table(table_name, self.metadata, *columns, extend_existing=True)
+        table = Table(
+            table_name, self.metadata, *columns, extend_existing=True
+        )
         return table
 
     def ingest_csv(self, file_path: str, table_name: str) -> Dict[str, Any]:
@@ -160,7 +168,9 @@ class DatabaseManager:
                 total = conn.execute(text(count_query)).scalar()
 
                 # Get data
-                data_query = f"SELECT * FROM {table_name} LIMIT {limit} OFFSET {offset}"
+                data_query = (
+                    f"SELECT * FROM {table_name} LIMIT {limit} OFFSET {offset}"
+                )
                 result = conn.execute(text(data_query))
 
                 # Convert to list of dictionaries

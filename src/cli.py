@@ -250,7 +250,9 @@ def init_db() -> None:
     required=True,
     help="Name of the table to create/insert into",
 )
-@click.option("--replace", is_flag=True, help="Replace table if it already exists")
+@click.option(
+    "--replace", is_flag=True, help="Replace table if it already exists"
+)
 def ingest(file: str, table: str, replace: bool) -> None:
     """Ingest a CSV file into PostgreSQL."""
     file_path = Path(file).resolve()
@@ -333,7 +335,9 @@ def ingest(file: str, table: str, replace: bool) -> None:
     type=int,
     help=f"Port to bind the server (default: {Config.SERVER_PORT})",
 )
-@click.option("--reload", is_flag=True, help="Enable auto-reload for development")
+@click.option(
+    "--reload", is_flag=True, help="Enable auto-reload for development"
+)
 def serve(host: Optional[str], port: Optional[int], reload: bool) -> None:
     """Start the GraphQL API server."""
     host = host or Config.SERVER_HOST
@@ -385,7 +389,9 @@ def serve(host: Optional[str], port: Optional[int], reload: bool) -> None:
            └─┘┴ ┴└─┘ ┴ ─┴┘└─┘└┘└┘┘└┘
         """
         click.echo(click.style(shutdown_art, fg="yellow", bold=True))
-        goodbye_msg = "👋 Server stopped gracefully - Thanks for using CSV GraphQL!"
+        goodbye_msg = (
+            "👋 Server stopped gracefully - Thanks for using CSV GraphQL!"
+        )
         click.echo(click.style(goodbye_msg, fg="yellow", bold=True))
         print_divider("wave")
 
