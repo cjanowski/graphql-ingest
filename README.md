@@ -42,8 +42,8 @@
 
 ```bash
 # From source (recommended - package not yet on PyPI)
-git clone https://github.com/cjanowski/csv-graphql-cli.git
-cd csv-graphql-cli
+git clone https://github.com/cjanowski/graphql-ingest.git
+cd graphql-ingest
 pip install -e .
 
 # For development with all dev dependencies
@@ -84,7 +84,7 @@ Use the convenient wrapper script (`csvgql.py`) if you prefer not to install:
 
 ```bash
 # Navigate to project directory
-cd csv-graphql-cli
+cd graphql-ingest
 
 # 1️⃣ Show the main interface and available commands
 python csvgql.py
@@ -110,7 +110,7 @@ For development, you can also run directly from source:
 
 ```bash
 # Navigate to project directory
-cd csv-graphql-cli
+cd graphql-ingest
 
 # Run CLI directly from source
 python -m src.cli
@@ -165,7 +165,7 @@ If you prefer not to install the package:
 
 ```bash
 # Navigate to project directory
-cd csv-graphql-cli
+cd graphql-ingest
 
 # Use the wrapper script
 python csvgql.py                    # Show main interface
@@ -267,7 +267,7 @@ cp config/env.example .env
 ## 📁 Project Structure
 
 ```
-csv-graphql-cli/
+graphql-ingest/
 ├── 📦 src/                    # Main application code
 │   ├── cli.py                 # Command-line interface
 │   ├── config.py              # Configuration management
@@ -340,22 +340,22 @@ docker run -p 8000:8000 csv-graphql-cli
 
 ### Option 1: Install from Source (Recommended)
 ```bash
-git clone https://github.com/cjanowski/csv-graphql-cli.git
-cd csv-graphql-cli
+git clone https://github.com/cjanowski/graphql-ingest.git
+cd graphql-ingest
 pip install -e .
 ```
 
 ### Option 2: Development Setup
 ```bash
-git clone https://github.com/cjanowski/csv-graphql-cli.git
-cd csv-graphql-cli
+git clone https://github.com/cjanowski/graphql-ingest.git
+cd graphql-ingest
 pip install -e ".[dev]"
 ```
 
 ### Option 3: Using Virtual Environment (Recommended)
 ```bash
-git clone https://github.com/cjanowski/csv-graphql-cli.git
-cd csv-graphql-cli
+git clone https://github.com/cjanowski/graphql-ingest.git
+cd graphql-ingest
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -e .
