@@ -300,17 +300,61 @@ def ingest(file: str, table: str, replace: bool) -> None:
     print_divider()
 
     if result["success"]:
-        success_box = f"""
-╔══════════════════════════════════════════════════════════════╗
-║                      INGESTION SUCCESSFUL!                   ║
-╠══════════════════════════════════════════════════════════════╣
-║    Table:        {result['table_name']:<40}                  ║
-║    Rows inserted: {result['rows_inserted']:<39}              ║
-║    Columns:      {len(result['columns']):<40}                ║
-║                                                              ║
-║  Columns: {', '.join(result['columns']):<48}                 ║
-╚══════════════════════════════════════════════════════════════╝
-"""
+        # Create dynamic box with proper text wrapping
+        columns_text = ', '.join(result['columns'])
+        box_width = 72
+        
+        # Calculate available width for content (excluding borders and prefixes)
+        # "║ " = 2 chars, " ║" = 2 chars, so borders = 4 chars total
+        # "Columns: " = 9 chars, "         " = 9 chars for continuation
+        # Total: box_width(72) - borders(4) - prefix(9) = 59 characters for text
+        content_width = 59
+        
+        # Wrap columns text to fit within box
+        import textwrap
+        wrapped_columns = textwrap.fill(columns_text, width=content_width)
+        column_lines = wrapped_columns.split('\n')
+        
+        # Create box structure
+        top_line = "╔" + "═" * (box_width - 2) + "╗"
+        header_line = "║" + "INGESTION SUCCESSFUL!".center(box_width - 2) + "║"
+        separator_line = "╠" + "═" * (box_width - 2) + "╣"
+        
+        # Create content lines with proper padding
+        # Calculate exact widths for each prefix
+        table_prefix = "║ Table:         "  # 16 chars
+        rows_prefix = "║ Rows inserted: "   # 16 chars  
+        cols_prefix = "║ Columns:       "   # 17 chars
+        
+        content_lines = [
+            f"║ Table:         {result['table_name']:<{box_width - len(table_prefix) - 2}} ║",
+            f"║ Rows inserted: {result['rows_inserted']:<{box_width - len(rows_prefix) - 2}} ║",
+            f"║ Columns:       {len(result['columns']):<{box_width - len(cols_prefix) - 2}} ║",
+            "║" + " " * (box_width - 2) + "║",
+        ]
+        
+        # Add wrapped column lines with consistent alignment
+        for i, line in enumerate(column_lines):
+            if i == 0:
+                # First line: "║ Columns: {text} ║" (exactly 60 chars for text)
+                padded_line = f"{line:<{content_width}}"
+                content_lines.append(f"║ Columns: {padded_line} ║")
+            else:
+                # Continuation lines: "║          {text} ║" (exactly 60 chars for text)
+                padded_line = f"{line:<{content_width}}"
+                content_lines.append(f"║          {padded_line} ║")
+        
+        # Create box bottom
+        bottom_line = "╚" + "═" * (box_width - 2) + "╝"
+        
+        # Combine all lines
+        success_box = "\n".join([
+            top_line,
+            header_line,
+            separator_line,
+            *content_lines,
+            bottom_line
+        ])
         click.echo(click.style(success_box, fg="green", bold=True))
         ready_msg = f"Ready to query! Try: python3 cli.py preview -t {table}"
         print_info(ready_msg)
@@ -353,25 +397,69 @@ def serve(host: Optional[str], port: Optional[int], reload: bool) -> None:
     click.echo(click.style(launch_msg, fg="cyan", bold=True))
     print_divider()
 
-    # Server info box
-    server_info = f"""
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃                         SERVER READY                                   ┃
-┃                      GraphQL API Active                                ┃
-┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                                                                        ┃
-┃    Server URL:      http://{host}:{port:<30}                           ┃
-┃    GraphQL Playground: http://{host}:{port}/graphql{' ' * 19}          ┃
-┃    API Docs:        http://{host}:{port}/docs{' ' * 23}                ┃
-┃                                                                        ┃
-┃    Sample Queries:                                                     ┃
-┃     • List tables:     {{ tables {{ name }} }}                         ┃
-┃     • Get table data:  {{ tableData(tableName: "employees") }}         ┃
-┃     • Ingest CSV:      mutation {{ ingestCsv(file: "data.csv") }}      ┃
-┃                                                                        ┃
-┃    X Press Ctrl+C to stop the server                                   ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-"""
+    # Server info box with dynamic sizing
+    server_url = f"http://{host}:{port}"
+    graphql_url = f"http://{host}:{port}/graphql"
+    docs_url = f"http://{host}:{port}/docs"
+    
+    # Calculate the required box width based on content
+    max_content_width = max(
+        len("SERVER READY"),
+        len("GraphQL API Active"),
+        len(f"Server URL:      {server_url}"),
+        len(f"GraphQL Playground: {graphql_url}"),
+        len(f"API Docs:        {docs_url}"),
+        len("Sample Queries:"),
+        len(" • List tables:     { tables { name } }"),
+        len(" • Get table data:  { tableData(tableName: \"employees\") }"),
+        len(" • Ingest CSV:      mutation { ingestCsv(file: \"data.csv\") }"),
+        len("✘ Press Ctrl+C to stop the server")
+    )
+    
+    # Set minimum box width and add padding
+    box_width = max(max_content_width + 8, 72)  # Minimum 72 chars, or content + 8
+    content_width = box_width - 4  # Space for "┃ " and " ┃"
+    
+    # Create box structure
+    top_line = "┏" + "━" * (box_width - 2) + "┓"
+    header_line = "┃" + "SERVER READY".center(box_width - 2) + "┃"
+    subheader_line = "┃" + "GraphQL API Active".center(box_width - 2) + "┃"
+    separator_line = "┣" + "━" * (box_width - 2) + "┫"
+    bottom_line = "┗" + "━" * (box_width - 2) + "┛"
+    
+    # Create content lines with proper padding - each line exactly content_width chars
+    server_line = f"Server URL:      {server_url}"
+    graphql_line = f"GraphQL Playground: {graphql_url}"
+    docs_line = f"API Docs:        {docs_url}"
+    queries_line = "Sample Queries:"
+    list_line = " • List tables:     { tables { name } }"
+    table_line = " • Get table data:  { tableData(tableName: \"employees\") }"
+    ingest_line = " • Ingest CSV:      mutation { ingestCsv(file: \"data.csv\") }"
+    stop_line = "✘ Press Ctrl+C to stop the server"
+    
+    content_lines = [
+        "┃ " + " " * content_width + " ┃",
+        f"┃ {server_line:<{content_width}} ┃",
+        f"┃ {graphql_line:<{content_width}} ┃",
+        f"┃ {docs_line:<{content_width}} ┃",
+        "┃ " + " " * content_width + " ┃",
+        f"┃ {queries_line:<{content_width}} ┃",
+        f"┃ {list_line:<{content_width}} ┃",
+        f"┃ {table_line:<{content_width}} ┃",
+        f"┃ {ingest_line:<{content_width}} ┃",
+        "┃ " + " " * content_width + " ┃",
+        f"┃ {stop_line:<{content_width}} ┃"
+    ]
+    
+    # Combine all lines
+    server_info = "\n".join([
+        top_line,
+        header_line,
+        subheader_line,
+        separator_line,
+        *content_lines,
+        bottom_line
+    ])
     click.echo(click.style(server_info, fg="green"))
 
     try:
