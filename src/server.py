@@ -11,7 +11,7 @@ app = FastAPI(
     description=(
         ("A GraphQL API for querying data ingested from CSV files " "into PostgreSQL")
     ),
-    version="1.0.0",
+    version="1.0.3",
 )
 
 # Create GraphQL router
@@ -26,7 +26,7 @@ async def root() -> Dict[str, Any]:
     """Root endpoint with API information."""
     return {
         "message": "CSV to PostgreSQL GraphQL API",
-        "version": "1.0.0",
+        "version": "1.0.3",
         "endpoints": {
             "graphql": "/graphql",
             "graphql_playground": "/graphql (GraphiQL interface)",
