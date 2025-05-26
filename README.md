@@ -126,10 +126,15 @@ python -m src.cli serve
 ## 🎬 Demo
 
 _Demo video coming soon - showing the CLI interface in action!_
-<img width="631" alt="Screenshot 2025-05-25 at 6 47 00 PM" src="https://github.com/user-attachments/assets/ad3445bf-5081-4ef8-8d50-579c64592ba0" />
-<img width="503" alt="Screenshot 2025-05-25 at 6 47 08 PM" src="https://github.com/user-attachments/assets/8f9779b7-7e2e-4606-8e0e-2c1a5bb2964f" />
-<img width="465" alt="Screenshot 2025-05-25 at 6 47 18 PM" src="https://github.com/user-attachments/assets/7e1009ea-8fac-4688-8776-b90cdc11337a" />
-<img width="550" alt="Screenshot 2025-05-25 at 6 47 33 PM" src="https://github.com/user-attachments/assets/c163667a-76be-4b14-8a23-50032e94cffa" />
+
+<img width="563" alt="Screenshot 2025-05-25 at 9 34 21 PM" src="https://github.com/user-attachments/assets/898216fd-fba8-4056-b55e-346a0b1e3390" />
+<img width="583" alt="Screenshot 2025-05-25 at 9 33 58 PM" src="https://github.com/user-attachments/assets/aa375571-8fcf-44f5-9d7a-3692c39b525e" />
+<img width="586" alt="Screenshot 2025-05-25 at 9 33 41 PM" src="https://github.com/user-attachments/assets/2010406f-5948-4f6e-bb85-efbfdf99c1b1" />
+<img width="586" alt="Screenshot 2025-05-25 at 9 33 31 PM" src="https://github.com/user-attachments/assets/459bbd06-ced4-4365-9a8a-c3979dc0a9ed" />
+<img width="87" alt="Screenshot 2025-05-25 at 9 33 20 PM" src="https://github.com/user-attachments/assets/3441a982-a3aa-428e-a3dc-dcee54f5e1bc" />
+<img width="582" alt="Screenshot 2025-05-25 at 9 32 57 PM" src="https://github.com/user-attachments/assets/d1a00e9b-653b-4a5d-a508-aa030e3ae4e7" />
+<img width="587" alt="Screenshot 2025-05-25 at 9 32 47 PM" src="https://github.com/user-attachments/assets/6f23dcfd-9042-411a-becd-d43823a7267e" />
+
 
 ## 📊 Example Workflow
 
