@@ -11,7 +11,7 @@ maintainers = [
     {name = "Cory Janowski", email = "coryjanowski@icloud.com"},
 ]
 description = "🍓 A beautiful CLI tool for ingesting CSV files into PostgreSQL and serving data via GraphQL"
-readme = "README.md"
+readme = {file = "README.md", content-type = "text/markdown"}
 license = {text = "MIT"}
 requires-python = ">=3.9"
 classifiers = [
@@ -36,7 +36,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 keywords = ["csv", "postgresql", "graphql", "cli", "data", "ingestion", "strawberry", "fastapi", "database", "api", "etl", "pandas"]
-version = "1.0.3"
+version = "1.0.4"
 
 dependencies = [
     "click>=8.1.7",
