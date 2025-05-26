@@ -186,7 +186,7 @@ def cli(ctx: click.Context) -> None:
             ("🔍 preview", "Preview table data"),
             ("📋 tables", "List all database tables"),
             ("🚀 serve", "Start GraphQL API server"),
-            ("⚙️ config-info", "Show current configuration"),
+            ("⚙️  config-info", "Show current configuration"),
         ]
 
         for cmd, desc in commands:
