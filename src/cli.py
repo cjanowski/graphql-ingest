@@ -24,23 +24,23 @@ logger = logging.getLogger(__name__)
 # ASCII Art Banner
 BANNER = """
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃  ┌─┐┌─┐┬  ┬   ┌─┐┬─┐┌─┐┌─┐┬ ┬┌─┐┬    ┌─┐┬  ┬   ┌┬┐┌─┐┌─┐┬    🍓       ┃
-┃  │  └─┐└┐┌┘   │ ┬├┬┘├─┤├─┘├─┤│ ││  ───│  │  │    │ │ ││ ││                ┃
-┃  └─┘└─┘ └┘    └─┘┴└─┴ ┴┴  ┴ ┴└─┘┴─┘   └─┘┴─┘┴   ─┴┘└─┘└─┘┴─┘              ┃
+┃  ┌─┐┌─┐┬  ┬   ┌─┐┬─┐┌─┐┌─┐┬ ┬┌─┐┬     ┌─┐┬  ┬   ┌┬┐┌─┐┌─┐┬                      ┃
+┃  │  └─┐└┐┌┘   │ ┬├┬┘├─┤├─┘├─┤│ ││  ───│  │  │    │ │ ││ ││                      ┃
+┃  └─┘└─┘ └┘    └─┘┴└─┴ ┴┴  ┴ ┴└─┘┴─┘   └─┘┴─┘┴   ─┴┘└─┘└─┘┴─┘                    ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                                                                             ┃
-┃  ██████╗███████╗██╗   ██╗    ██████╗ ██████╗  █████╗ ██████╗ ██╗  ██╗██████┃
-┃ ██╔════╝██╔════╝██║   ██║   ██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██║  ██║██╔═══┃
-┃ ██║     ███████╗██║   ██║   ██║  ███╗██████╔╝███████║██████╔╝███████║██████┃
-┃ ██║     ╚════██║╚██╗ ██╔╝   ██║   ██║██╔══██╗██╔══██║██╔═══╝ ██╔══██║██╔═══┃
-┃ ╚██████╗███████║ ╚████╔╝    ╚██████╔╝██║  ██║██║  ██║██║     ██║  ██║██████┃
-┃  ╚═════╝╚══════╝  ╚═══╝      ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚═════┃
-┃                                                                             ┃
+┃                                                                                 ┃
+┃  ██████╗███████╗██╗   ██╗    ██████╗ ██████╗  █████╗ ██████╗ ██╗  ██╗██████     ┃
+┃ ██╔════╝██╔════╝██║   ██║   ██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██║  ██║██╔═══     ┃
+┃ ██║     ███████╗██║   ██║   ██║  ███╗██████╔╝███████║██████╔╝███████║██████     ┃
+┃ ██║     ╚════██║╚██╗ ██╔╝   ██║   ██║██╔══██╗██╔══██║██╔═══╝ ██╔══██║██╔═══     ┃
+┃ ╚██████╗███████║ ╚████╔╝    ╚██████╔╝██║  ██║██║  ██║██║     ██║  ██║██████     ┃
+┃  ╚═════╝╚══════╝  ╚═══╝      ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚═════     ┃
+┃                                                                                 ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃          🍓 CSV to PostgreSQL GraphQL CLI Tool v1.0.0 🍓                  ┃
-┃          📊 Ingest → 🐘 Store → 🔍 Query → 🚀 Serve                       ┃
-┃                                                                             ┃
-┃   ✨ Professional Data Pipeline in Your Terminal ✨                        ┃
+┃          🍓 CSV to PostgreSQL GraphQL CLI Tool v1.0.0 🍓                        ┃
+┃          📊 Ingest → 🐘 Store → 🔍 Query → 🚀 Serve                              ┃
+┃                                                                                 ┃
+┃         ✨ Professional Data Pipeline in Your Terminal ✨                       ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 """
 
@@ -50,19 +50,19 @@ WAVE_DIVIDER = "┈" * 80
 
 # Mini ASCII art for different contexts
 INIT_ART = """
-    🔧 ┌─┐┌─┐┌┬┐┌─┐┌┐ ┌─┐┌─┐┌─┐  ┬┌┐┌┬┌┬┐
+       ┌─┐┌─┐┌┬┐┌─┐┌┐ ┌─┐┌─┐┌─┐  ┬┌┐┌┬┌┬┐
        └─┐├┤  │ │ │├┴┐├─┤└─┐├┤   ││││││ │
        └─┘└─┘ ┴ └─┘└─┘┴ ┴└─┘└─┘  ┴┘└┘┴ ┴
 """
 
 INGEST_ART = """
-    📊 ┌─┐┌─┐┬  ┬  ┬┌┐┌┌─┐┌─┐┌─┐┌┬┐
-       │  └─┐└┐┌┘  ││││││ ┬├┤ └─┐ │
-       └─┘└─┘ └┘   ┴┘└┘└─┘└─┘└─┘ ┴
+       ┌─┐┌─┐┬  ┬  ┬┌┐┌┌─┐┌─┐┌─┐┌┬┐
+       │  └─┐└┐┌┘  │││││ ┬├┤ └─┐ │
+       └─┘└─┘ └┘   ┴┘└┘└─┘└─ └─┘ ┴
 """
 
 SERVER_ART = """
-    🚀 ┌─┐┌─┐┬─┐┬  ┬┌─┐┬─┐  ┬─┐┌─┐┌─┐┌┬┐┬ ┬
+       ┌─┐┌─┐┬─┐┬  ┬┌─┐┬─┐  ┬─┐┌─┐┌─┐┌┬┐┬ ┬
        └─┐├┤ ├┬┘└┐┌┘├┤ ├┬┘  ├┬┘├┤ ├─┤ ││└┬┘
        └─┘└─┘┴└─ └┘ └─┘┴└─  ┴└─└─┘┴ ┴─┴┘ ┴
 """
@@ -137,21 +137,21 @@ def cli(ctx: click.Context) -> None:
         if is_wrapper:
             help_text = """
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃                         🚀 QUICK START 🚀                         ┃
-┃                    From CSV to GraphQL in Minutes!                ┃
+┃                            QUICK START                                 ┃
+┃                    From CSV to GraphQL in Minutes!                     ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                                                                    ┃
-┃  1️⃣  Initialize:    csvgql init-db                               ┃
-┃  2️⃣  Ingest CSV:    csvgql ingest -f data.csv -t table           ┃
-┃  3️⃣  Preview:       csvgql preview -t table                      ┃
-┃  4️⃣  Start server:  csvgql serve                                 ┃
-┃  5️⃣  Query data:    Visit http://localhost:8000/graphql          ┃
-┃                                                                    ┃
-┃  ✨ Using installed version with shorter commands!                ┃
-┃                                                                    ┃
-┃  📖 Full help:      csvgql --help                                ┃
-┃  📖 Command help:   csvgql COMMAND --help                        ┃
-┃                                                                    ┃
+┃                                                                        ┃
+┃  1  Initialize:    csvgql init-db                                      ┃
+┃  2  Ingest CSV:    csvgql ingest -f data.csv -t table                  ┃
+┃  3  Preview:       csvgql preview -t table                             ┃
+┃  4  Start server:  csvgql serve                                        ┃
+┃  5  Query data:    Visit http://localhost:8000/graphql                 ┃
+┃                                                                        ┃
+┃    Using installed version with shorter commands!                      ┃
+┃                                                                        ┃
+┃     Full help:      csvgql --help                                      ┃
+┃     Command help:   csvgql COMMAND --help                              ┃
+┃                                                                        ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 🔧 Available Commands:
@@ -159,21 +159,21 @@ def cli(ctx: click.Context) -> None:
         else:
             help_text = """
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃                         🚀 QUICK START 🚀                         ┃
-┃                    From CSV to GraphQL in Minutes!                ┃
+┃                            QUICK START                                 ┃
+┃                    From CSV to GraphQL in Minutes!                     ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                                                                    ┃
-┃  1️⃣  Initialize:    python -m src.cli init-db                    ┃
-┃  2️⃣  Ingest CSV:    python -m src.cli ingest -f data.csv -t table ┃
-┃  3️⃣  Preview:       python -m src.cli preview -t table           ┃
-┃  4️⃣  Start server:  python -m src.cli serve                      ┃
-┃  5️⃣  Query data:    Visit http://localhost:8000/graphql          ┃
-┃                                                                    ┃
-┃  ✨ Pro tip: Use csvgql for shorter commands after install!       ┃
-┃                                                                    ┃
-┃  📖 Full help:      python -m src.cli --help                     ┃
-┃  📖 Command help:   python -m src.cli COMMAND --help             ┃
-┃                                                                    ┃
+┃                                                                        ┃
+┃  1  Initialize:    python -m src.cli init-db                           ┃
+┃  2  Ingest CSV:    python -m src.cli ingest -f data.csv -t table       ┃
+┃  3  Preview:       python -m src.cli preview -t table                  ┃
+┃  4  Start server:  python -m src.cli serve                             ┃
+┃  5  Query data:    Visit http://localhost:8000/graphql                 ┃
+┃                                                                        ┃
+┃    Pro tip: Use csvgql for shorter commands after install!             ┃
+┃                                                                        ┃
+┃    Full help:      python -m src.cli --help                            ┃
+┃    Command help:   python -m src.cli COMMAND --help                    ┃
+┃                                                                        ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 🔧 Available Commands:
@@ -220,13 +220,13 @@ def init_db() -> None:
 
         connection_box = """
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃                    🎉 CONNECTION SUCCESS! 🎉                ┃
+┃                      CONNECTION SUCCESS!                        ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃  ✅ Database ready for CSV ingestion                        ┃
-┃  ✅ GraphQL schema prepared                                 ┃
-┃  ✅ All systems operational                                 ┃
-┃                                                             ┃
-┃  🎯 Next step: python -m src.cli ingest -f data.csv -t table  ┃
+┃    Database ready for CSV ingestion!                            ┃
+┃    GraphQL schema prepared!                                     ┃
+┃    All systems operational!                                     ┃
+┃                                                                 ┃
+┃   Next step: python -m src.cli ingest -f data.csv -t table      ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 """
         click.echo(click.style(connection_box, fg="green", bold=True))
@@ -302,13 +302,13 @@ def ingest(file: str, table: str, replace: bool) -> None:
     if result["success"]:
         success_box = f"""
 ╔══════════════════════════════════════════════════════════════╗
-║                    🎉 INGESTION SUCCESSFUL! 🎉              ║
+║                      INGESTION SUCCESSFUL!                   ║
 ╠══════════════════════════════════════════════════════════════╣
-║  📊 Table:        {result['table_name']:<40} ║
-║  📈 Rows inserted: {result['rows_inserted']:<39} ║
-║  📋 Columns:      {len(result['columns']):<40} ║
+║    Table:        {result['table_name']:<40}                  ║
+║    Rows inserted: {result['rows_inserted']:<39}              ║
+║    Columns:      {len(result['columns']):<40}                ║
 ║                                                              ║
-║  Columns: {', '.join(result['columns']):<48} ║
+║  Columns: {', '.join(result['columns']):<48}                 ║
 ╚══════════════════════════════════════════════════════════════╝
 """
         click.echo(click.style(success_box, fg="green", bold=True))
@@ -356,20 +356,20 @@ def serve(host: Optional[str], port: Optional[int], reload: bool) -> None:
     # Server info box
     server_info = f"""
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃                       🍓 SERVER READY 🍓                         ┃
-┃                    ✨ GraphQL API Active ✨                      ┃
+┃                         SERVER READY                                   ┃
+┃                      GraphQL API Active                                ┃
 ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                                                                    ┃
-┃  🌐 Server URL:      http://{host}:{port:<30} ┃
-┃  🔍 GraphQL Playground: http://{host}:{port}/graphql{' ' * 19} ┃
-┃  📊 API Docs:        http://{host}:{port}/docs{' ' * 23} ┃
-┃                                                                    ┃
-┃  🎯 Sample Queries:                                                ┃
-┃     • List tables:     {{ tables {{ name }} }}                    ┃
-┃     • Get table data:  {{ tableData(tableName: "employees") }}    ┃
-┃     • Ingest CSV:      mutation {{ ingestCsv(file: "data.csv") }}  ┃
-┃                                                                    ┃
-┃  🛑 Press Ctrl+C to stop the server                               ┃
+┃                                                                        ┃
+┃    Server URL:      http://{host}:{port:<30}                           ┃
+┃    GraphQL Playground: http://{host}:{port}/graphql{' ' * 19}          ┃
+┃    API Docs:        http://{host}:{port}/docs{' ' * 23}                ┃
+┃                                                                        ┃
+┃    Sample Queries:                                                     ┃
+┃     • List tables:     {{ tables {{ name }} }}                         ┃
+┃     • Get table data:  {{ tableData(tableName: "employees") }}         ┃
+┃     • Ingest CSV:      mutation {{ ingestCsv(file: "data.csv") }}      ┃
+┃                                                                        ┃
+┃    X Press Ctrl+C to stop the server                                   ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 """
     click.echo(click.style(server_info, fg="green"))
@@ -380,7 +380,7 @@ def serve(host: Optional[str], port: Optional[int], reload: bool) -> None:
         print_divider("fancy")
 
         shutdown_art = """
-        🛑 ┌─┐┬ ┬┬ ┬┌┬┐┌┬┐┌─┐┬ ┬┌┐┌
+           ┌─┐┬ ┬┬ ┬┌┬┐┌┬┐┌─┐┬ ┬┌┐┌
            └─┐├─┤│ │ │  │││ │││││││││
            └─┘┴ ┴└─┘ ┴ ─┴┘└─┘└┘└┘┘└┘
         """
