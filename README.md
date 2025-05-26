@@ -127,12 +127,14 @@ python -m src.cli serve
 
 _Demo video coming soon - showing the CLI interface in action!_
 
-<img width="563" alt="Screenshot 2025-05-25 at 9 34 21 PM" src="https://github.com/user-attachments/assets/4fea8312-e3fe-47af-b079-4ee9e81adece" />
-<img width="583" alt="Screenshot 2025-05-25 at 9 33 58 PM" src="https://github.com/user-attachments/assets/74df67b2-4fd1-4389-9e3a-ee61e9cb1be4" />
-<img width="586" alt="Screenshot 2025-05-25 at 9 33 41 PM" src="https://github.com/user-attachments/assets/60231124-52bf-4843-865f-321550ecf5aa" />
-<img width="586" alt="Screenshot 2025-05-25 at 9 33 31 PM" src="https://github.com/user-attachments/assets/7af9685b-51d4-416b-8350-27f0140d2413" />
-<img width="582" alt="Screenshot 2025-05-25 at 9 32 57 PM" src="https://github.com/user-attachments/assets/afe13eb8-7c0a-40a5-a610-39ddac06b2b2" />
-<img width="587" alt="Screenshot 2025-05-25 at 9 32 47 PM" src="https://github.com/user-attachments/assets/9f2f818b-76e2-40d7-baf3-871df3e395d5" />
+<img width="587" alt="Screenshot 2025-05-25 at 9 32 47 PM" src="https://github.com/user-attachments/assets/4f98ad8d-493d-4805-99cd-d79f0f9e2780" />
+<img width="582" alt="Screenshot 2025-05-25 at 9 32 57 PM" src="https://github.com/user-attachments/assets/025e3fbf-2e55-431c-9e45-dbc70c88426a" />
+<img width="586" alt="Screenshot 2025-05-25 at 9 33 31 PM" src="https://github.com/user-attachments/assets/7d24e284-02b1-4797-96f2-b06fbd6b100d" />
+<img width="586" alt="Screenshot 2025-05-25 at 9 33 41 PM" src="https://github.com/user-attachments/assets/61f7df72-867c-4970-858e-8f9acd0a6923" />
+<img width="583" alt="Screenshot 2025-05-25 at 9 33 58 PM" src="https://github.com/user-attachments/assets/d47ced3c-0ec2-4aa1-8cdf-e97f10948372" />
+<img width="563" alt="Screenshot 2025-05-25 at 9 34 21 PM" src="https://github.com/user-attachments/assets/ac607c4b-c6d1-46dc-bb54-aa2c4abcdbcb" />
+<img width="582" alt="Screenshot 2025-05-25 at 9 34 44 PM" src="https://github.com/user-attachments/assets/5ffdce9a-9901-4c74-a557-d0ed887216b7" />
+
 
 ## 📊 Example Workflow
 
