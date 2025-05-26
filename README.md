@@ -128,7 +128,7 @@ python -m src.cli serve
 _Demo video coming soon - showing the CLI interface in action!_
 
 <img width="603" alt="Screenshot 2025-05-26 at 7 56 13 AM" src="https://github.com/user-attachments/assets/40354b0b-a234-49f0-86b7-1e70c0cd855d" />
-<img width="582" alt="Screenshot 2025-05-25 at 9 32 57 PM" src="https://github.com/user-attachments/assets/025e3fbf-2e55-431c-9e45-dbc70c88426a" />
+<img width="604" alt="Screenshot 2025-05-26 at 8 19 37 AM" src="https://github.com/user-attachments/assets/979fffdf-6180-4a22-bafb-822642a418e2" />
 <img width="586" alt="Screenshot 2025-05-25 at 9 33 31 PM" src="https://github.com/user-attachments/assets/7d24e284-02b1-4797-96f2-b06fbd6b100d" />
 <img width="586" alt="Screenshot 2025-05-25 at 9 33 41 PM" src="https://github.com/user-attachments/assets/61f7df72-867c-4970-858e-8f9acd0a6923" />
 <img width="583" alt="Screenshot 2025-05-25 at 9 33 58 PM" src="https://github.com/user-attachments/assets/d47ced3c-0ec2-4aa1-8cdf-e97f10948372" />
